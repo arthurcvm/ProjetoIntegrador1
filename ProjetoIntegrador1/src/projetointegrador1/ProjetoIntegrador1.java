@@ -7,6 +7,7 @@ package projetointegrador1;
 
 import control.Login;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -15,12 +16,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Aluno;
+import model.Professor;
 
 /**
  *
  * @author arthurcvm
  */
 public class ProjetoIntegrador1 extends Application {
+    private static Professor usuarioP;
+    private static Aluno usuarioA;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -34,6 +39,15 @@ public class ProjetoIntegrador1 extends Application {
     }
     
     public void showLogin(Stage stageMaster){
+        ArrayList<Professor> professorList = new ArrayList<>(); //Pega lista do banco
+        ArrayList<Aluno> alunoList = new ArrayList<>(); //Pega lista do banco
+        
+        professorList.add(new Professor("José", "12345678910")); //Dado teste
+        alunoList.add(new Aluno("Raimundo", "01987654321")); //Dado teste
+        
+//        usuarioA = new Aluno(); //Ativar construtor padrão
+//        usuarioP = new Professor(); //Ativar construtor padrão
+        
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml")); //Carrega o arquivo FXML
             AnchorPane page = (AnchorPane) loader.load();
@@ -45,6 +59,10 @@ public class ProjetoIntegrador1 extends Application {
             
             Login controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setStage(stage); //Seta stage para controle interno
+            controller.setAluno(usuarioA);
+            controller.setProfessor(usuarioP);
+            controller.setAlunoList(alunoList);
+            controller.setProfessorList(professorList);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
         

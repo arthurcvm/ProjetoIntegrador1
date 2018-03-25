@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.Login">
    <children>
-      <TextField fx:id="usuario" layoutX="101.0" layoutY="136.0" promptText="Usuário" />
-      <PasswordField fx:id="senha" layoutX="101.0" layoutY="192.0" promptText="Senha" />
-      <Button layoutX="152.0" layoutY="236.0" mnemonicParsing="false" onAction="#login" text="Login" />
       <Label layoutX="63.0" layoutY="59.0" text="Login no sistema">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Button layoutX="124.0" layoutY="281.0" mnemonicParsing="false" onAction="#recuperarSenha" text="Recuperar senha" />
+      <JFXTextField fx:id="usuario" labelFloat="true" layoutX="80.0" layoutY="130.0" prefHeight="30.0" prefWidth="208.0" promptText="Usuário">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="senha" labelFloat="true" layoutX="80.0" layoutY="193.0" prefHeight="30.0" prefWidth="208.0" promptText="Senha">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXPasswordField>
+      <JFXButton layoutX="145.0" layoutY="239.0" onAction="#login" style="-fx-background-color: #3498db;" text="LOGIN" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="104.0" layoutY="276.0" onAction="#recuperarSenha" style="-fx-background-color: #bdc3c7;" text="RECUPERAR SENHA" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

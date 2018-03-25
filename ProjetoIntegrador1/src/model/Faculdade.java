@@ -10,5 +10,26 @@ package model;
  * @author arthurcvm
  */
 public class Faculdade {
+    private int idFaculdade;
+    private String CNPF;
+    private String rua;
+    private int numero;
+    private String bairro;
+    private String convenio;
     
+    public void novaFaculdade(){
+        
+    }
+    
+    public void atualizarFaculdade(){
+        
+    }
+    
+    public void excluirFaculdade(){
+        
+    }
+    
+    public void visualizarFaculdade(){
+        
+    }
 }

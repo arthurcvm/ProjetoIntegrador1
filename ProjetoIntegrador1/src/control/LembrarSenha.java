@@ -5,8 +5,8 @@
  */
 package control;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -15,9 +15,9 @@ import javafx.stage.Stage;
  */
 public class LembrarSenha {
     @FXML
-    private TextField cpf;
+    private JFXTextField cpf;
     @FXML
-    private TextField senha;
+    private JFXTextField senha;
     
     private Stage stage;
     

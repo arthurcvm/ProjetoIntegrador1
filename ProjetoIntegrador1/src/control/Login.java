@@ -5,15 +5,18 @@
  */
 package control;
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Aluno;
+import model.Professor;
 
 /**
  *
@@ -21,11 +24,16 @@ import javafx.stage.Stage;
  */
 public class Login {
     @FXML
-    private TextField usuario;
+    private JFXTextField usuario;
     @FXML
-    private PasswordField senha;
+    private JFXPasswordField senha;
     
     private Stage stage;
+    private Aluno aluno;
+    private Professor professor;
+    
+    private ArrayList<Professor> professorList;
+    private ArrayList<Aluno> alunoList;
     
     /**
      * Inicializa a classe controlle. Este método é chamado automaticamente após
@@ -39,12 +47,57 @@ public class Login {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public void setProfessorList(ArrayList<Professor> professorList) {
+        this.professorList = professorList;
+    }
+
+    public void setAlunoList(ArrayList<Aluno> alunoList) {
+        this.alunoList = alunoList;
+    }
     
     @FXML
     private void login(){
+        String login = this.usuario.getText();
+        String pass = this.senha.getText();
         
+        for(Professor p: professorList){
+            if(p.getCpf().equals(login)){ //troca pelo login
+                if(p.getCpf().equals(pass)){ //troca pela senha
+                    professor.setNome(p.getNome());
+                    professor.setCpf(p.getCpf());
+                }
+            }
+        }
         
-        stage.close();
+        for(Aluno a: alunoList){
+            if(a.getCpf().equals(login)){ //troca pelo login
+                if(a.getCpf().equals(pass)){ //troca pela senha
+                    aluno.setNome(a.getNome());
+                    aluno.setCpf(a.getCpf());
+                }
+            }
+        }
+        
+        if(aluno.getNome() == null){ //Login incorreto
+            usuario.clear();
+            senha.clear();
+        }
+        else if(professor.getNome() == null){ //Login incorreto
+            usuario.clear();
+            senha.clear();
+        }
+        else{ //Login correto
+            this.stage.close();
+        }
     }
     
     @FXML
