@@ -5,6 +5,7 @@
  */
 package projetointegrador1;
 
+import control.Dashboard;
 import control.Login;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Aluno;
 import model.Professor;
@@ -63,6 +65,27 @@ public class ProjetoIntegrador1 extends Application {
             controller.setProfessor(usuarioP);
             controller.setAlunoList(alunoList);
             controller.setProfessorList(professorList);
+            
+            stage.showAndWait(); //Exibe janela e pausa esta thread
+            
+            dashboard(stageMaster);
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void dashboard(Stage stageMaster){        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Dashboard.fxml")); //Carrega o arquivo FXML
+            BorderPane page = (BorderPane) loader.load();
+            Stage stage = new Stage(); //Cria um novo Stage
+            stage.initOwner(stageMaster); //Seta um stage pai
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+            
+            Dashboard controller = loader.getController(); //Puxa a referência do controller instanciado
+            controller.setPainel(page);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
         

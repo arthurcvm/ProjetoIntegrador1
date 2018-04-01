@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FaculdadeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FaculdadeController">
    <children>
       <TableView layoutX="43.0" layoutY="132.0" prefHeight="200.0" prefWidth="514.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="120.0">
         <columns>
@@ -18,17 +18,17 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <JFXTextField labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="25.0" prefWidth="302.0" promptText="PESQUISAR">
+      <JFXTextField labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="25.0" prefWidth="302.0" promptText="PESQUISAR" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="60.0">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXButton layoutX="400.0" layoutY="57.0" prefHeight="30.0" style="-fx-background-color: #3498db;" text="Adicionar disciplina" textFill="WHITE">
+      <JFXButton layoutX="400.0" layoutY="57.0" prefHeight="30.0" style="-fx-background-color: #3498db;" text="Adicionar faculdade" textFill="WHITE" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="57.0">
          <font>
             <Font size="14.0" />
          </font>
       </JFXButton>
-      <ButtonBar layoutX="264.0" layoutY="356.0" prefHeight="40.0" prefWidth="316.0">
+      <ButtonBar layoutX="270.0" layoutY="446.0" prefHeight="40.0" prefWidth="316.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <buttons>
             <JFXButton style="-fx-background-color: #e74c3c;" text="EXCLUIR" textFill="WHITE">
                <font>

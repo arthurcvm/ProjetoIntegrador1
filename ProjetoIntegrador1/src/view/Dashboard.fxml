@@ -4,41 +4,42 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.Dashboard">
-   <children>
-      <AnchorPane prefHeight="500.0" prefWidth="170.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.Dashboard">
+   <left>
+      <AnchorPane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="112.0" fitWidth="150.0" layoutX="50.0" pickOnBounds="true" preserveRatio="true" />
-            <VBox layoutY="111.0">
+            <VBox layoutY="113.0">
                <children>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" prefHeight="35.0" prefWidth="200.0" text="Faculdades" textAlignment="RIGHT">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" onAction="#faculdades" prefHeight="35.0" prefWidth="200.0" text="Faculdades" textAlignment="RIGHT">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" prefHeight="35.0" prefWidth="200.0" text="Professores" textAlignment="RIGHT">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" onAction="#professores" prefHeight="35.0" prefWidth="200.0" text="Professores" textAlignment="RIGHT">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" prefHeight="35.0" prefWidth="200.0" text="Alunos" textAlignment="RIGHT">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" onAction="#alunos" prefHeight="35.0" prefWidth="200.0" text="Alunos" textAlignment="RIGHT">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="80.0" prefHeight="35.0" prefWidth="200.0" text="Semestres" textAlignment="RIGHT">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="80.0" onAction="#cursos" prefHeight="35.0" prefWidth="200.0" text="Cursos" textAlignment="RIGHT">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="115.0" prefHeight="35.0" prefWidth="200.0" text="Turmas" textAlignment="RIGHT">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="115.0" onAction="#turmas" prefHeight="35.0" prefWidth="200.0" text="Turmas" textAlignment="RIGHT">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
                   </JFXButton>
-                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="162.0" prefHeight="35.0" prefWidth="200.0" text="Disciplinas" textAlignment="RIGHT">
+                  <JFXButton alignment="BASELINE_LEFT" graphicTextGap="30.0" layoutX="10.0" layoutY="162.0" onAction="#disciplinas" prefHeight="35.0" prefWidth="200.0" text="Disciplinas" textAlignment="RIGHT">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
                      </graphic>
@@ -55,6 +56,5 @@
             <DropShadow />
          </effect>
       </AnchorPane>
-      <AnchorPane layoutX="238.0" prefHeight="400.0" prefWidth="630.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-   </children>
-</AnchorPane>
+   </left>
+</BorderPane>

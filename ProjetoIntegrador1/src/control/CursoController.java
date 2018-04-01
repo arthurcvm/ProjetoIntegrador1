@@ -9,6 +9,6 @@ package control;
  *
  * @author arthurcvm
  */
-public class FaculdadeDetalhes {
+public class CursoController {
     
 }
