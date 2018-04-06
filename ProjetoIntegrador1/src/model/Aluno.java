@@ -10,12 +10,24 @@ package model;
  * @author csarp
  */
 public class Aluno extends Pessoa{
-    
-    public Aluno(String nome, String cpf) {
-        super(nome, cpf);
-    }
+    private int IdAluno;
     private String RG;
+    
+    public Aluno(String nome, String cpf, String RG, int IdAluno) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.RG = RG;
+        this.IdAluno = IdAluno;
+    }
 
+    public int getIdAluno() {
+        return IdAluno;
+    }
+
+    public void setIdAluno(int IdAluno) {
+        this.IdAluno = IdAluno;
+    }
+    
     public String getRG() {
         return RG;
     }
