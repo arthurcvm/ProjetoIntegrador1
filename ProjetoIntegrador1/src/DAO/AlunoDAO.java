@@ -24,8 +24,8 @@ public class AlunoDAO {
         this.con = new ConnectionFacotory().getConnection();
     }
     public void insert(Aluno Aluno) throws SQLException{
-        String insert = "INSERT INTO aluno (nome, cpf,rg)";
-                insert += " VALUES(?,?,?)";
+        String insert = "INSERT INTO aluno (nome, cpf,rg,fkTurma)";
+                insert += " VALUES(?,?,?,?)";
                 
         PreparedStatement stmt = this.con.prepareStatement(insert);
         stmt.setString(1, Aluno.getNome());

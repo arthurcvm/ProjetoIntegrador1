@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Faculdade;
 
 /**
  *
@@ -24,12 +25,13 @@ public class ProfessorDAO {
         this.con = new ConnectionFacotory().getConnection();
     }
     public void insert(Professor professor) throws SQLException{
-        String insert = "INSERT INTO professor (nome, cpf)";
-                insert += " VALUES(?,?)";
+        String insert = "INSERT INTO professor (nome, cpf, fkFaculdade)";
+                insert += " VALUES(?,?,?)";
                 
         PreparedStatement stmt = this.con.prepareStatement(insert);
         stmt.setString(1, professor.getNome());
-        stmt.setString(2, professor.getCpf());       
+        stmt.setString(2, professor.getCpf());
+        //stmt.setInt(3, Faculdade.;
         try {
             stmt.execute();
             System.out.println("Gravado");
