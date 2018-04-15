@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,45 +11,46 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.TurmaController">
    <children>
-      <TableView layoutX="43.0" layoutY="132.0" prefHeight="200.0" prefWidth="514.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="120.0">
+      <TableView fx:id="turmaTable" layoutX="43.0" layoutY="132.0" prefHeight="200.0" prefWidth="514.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="120.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="DESCRIÇÃO" />
-          <TableColumn prefWidth="75.0" text="CURSO" />
-            <TableColumn prefWidth="75.0" text="CH" />
-            <TableColumn prefWidth="75.0" text="SEMESTRE" />
+          <TableColumn fx:id="descricaoColumn" prefWidth="75.0" text="DESCRIÇÃO" />
+          <TableColumn fx:id="cursoColumn" prefWidth="75.0" text="CURSO" />
+            <TableColumn fx:id="chColumn" prefWidth="75.0" text="CH" />
+            <TableColumn fx:id="semestreColumn" prefWidth="75.0" text="SEMESTRE" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <JFXTextField labelFloat="true" layoutX="40.0" layoutY="63.0" prefHeight="25.0" prefWidth="302.0" promptText="PESQUISAR" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="60.0">
+      <JFXTextField fx:id="pesquisarField" labelFloat="true" layoutX="40.0" layoutY="63.0" prefHeight="25.0" prefWidth="302.0" promptText="PESQUISAR" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXButton layoutX="400.0" layoutY="60.0" prefHeight="30.0" style="-fx-background-color: #3498db;" text="Adicionar turma" textFill="WHITE" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="57.0">
+      <JFXButton layoutX="400.0" layoutY="60.0" onAction="#adicionar" prefHeight="30.0" style="-fx-background-color: #3498db;" text="Adicionar turma" textFill="WHITE" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="70.0">
          <font>
             <Font size="14.0" />
          </font>
       </JFXButton>
       <ButtonBar layoutX="254.0" layoutY="346.0" prefHeight="40.0" prefWidth="316.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <buttons>
-            <JFXButton style="-fx-background-color: #e74c3c;" text="EXCLUIR" textFill="WHITE">
+            <JFXButton onAction="#excluir" style="-fx-background-color: #e74c3c;" text="EXCLUIR" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="135.0" layoutY="18.0" style="-fx-background-color: #3498db;" text="EDITAR" textFill="WHITE">
+            <JFXButton layoutX="135.0" layoutY="18.0" onAction="#editar" style="-fx-background-color: #3498db;" text="EDITAR" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="135.0" layoutY="18.0" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #2ecc71;" text="DETALHES" textFill="WHITE">
+            <JFXButton layoutX="135.0" layoutY="18.0" onAction="#detalhes" prefHeight="30.0" prefWidth="159.0" style="-fx-background-color: #2ecc71;" text="DETALHES" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
          </buttons>
       </ButtonBar>
+      <JFXComboBox fx:id="faculdadeBox" labelFloat="true" layoutX="425.0" layoutY="30.0" prefHeight="30.0" prefWidth="200.0" promptText="FACULDADE" style="-fx-font-size: 14;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0" />
    </children>
 </AnchorPane>

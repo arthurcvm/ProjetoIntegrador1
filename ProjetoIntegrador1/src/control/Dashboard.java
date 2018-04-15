@@ -31,6 +31,9 @@ public class Dashboard {
             AnchorPane pane = (AnchorPane) loader.load();
             
             this.painel.setRight(pane);
+            FaculdadeController controller = loader.getController();
+            controller.setPrimaryStage(painel);
+            
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -38,12 +41,32 @@ public class Dashboard {
     
     @FXML
     private void professores(){
-        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Professor.fxml"));
+            AnchorPane pane = (AnchorPane) loader.load();
+            
+            this.painel.setRight(pane);
+            ProfessorController controller = loader.getController();
+            controller.setPrimaryStage(painel);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @FXML
     private void alunos(){
-        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Aluno.fxml"));
+            AnchorPane pane = (AnchorPane) loader.load();
+            
+            this.painel.setRight(pane);
+            AlunoController controller = loader.getController();
+            controller.setPrimaryStage(painel);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     @FXML
     private void cursos(){
@@ -52,6 +75,9 @@ public class Dashboard {
             AnchorPane pane = (AnchorPane) loader.load();
             
             this.painel.setRight(pane);
+            CursoController controller = loader.getController();
+            controller.setPrimaryStage(painel);
+            
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,6 +90,9 @@ public class Dashboard {
             AnchorPane pane = (AnchorPane) loader.load();
             
             this.painel.setRight(pane);
+            TurmaController controller = loader.getController();
+            controller.setPrimaryStage(painel);
+            
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,6 +105,9 @@ public class Dashboard {
             AnchorPane pane = (AnchorPane) loader.load();
             
             this.painel.setRight(pane);
+            DisciplinaController controller = loader.getController();
+            controller.setPrimaryStage(painel);
+            
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }

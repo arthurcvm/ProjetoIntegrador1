@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.DisciplinaForm">
+   <children>
+      <JFXTextField fx:id="nomeField" labelFloat="true" layoutX="91.0" layoutY="106.0" prefHeight="30.0" prefWidth="369.0" promptText="NOME">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="abreviacaoField" labelFloat="true" layoutX="91.0" layoutY="161.0" prefHeight="30.0" prefWidth="200.0" promptText="ABREVIAÇÃO">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="chField" labelFloat="true" layoutX="91.0" layoutY="216.0" prefHeight="30.0" prefWidth="98.0" promptText="CH">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <ButtonBar layoutX="179.0" layoutY="434.0" prefHeight="40.0" prefWidth="226.0">
+         <buttons>
+            <JFXButton onAction="#cancelar" style="-fx-background-color: #e74c3c;" text="CANCELAR" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="122.0" layoutY="15.0" onAction="#cadastrar" style="-fx-background-color: #2ecc71;" text="CADASTRAR" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+         </buttons>
+      </ButtonBar>
+      <JFXTextField fx:id="semestreField" labelFloat="true" layoutX="91.0" layoutY="271.0" prefHeight="30.0" prefWidth="98.0" promptText="SEMESTRE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="professorField" labelFloat="true" layoutX="91.0" layoutY="326.0" prefHeight="30.0" prefWidth="200.0" promptText="PROFESSOR">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+   </children>
+</AnchorPane>

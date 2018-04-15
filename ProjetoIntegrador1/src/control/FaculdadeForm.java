@@ -41,6 +41,8 @@ public class FaculdadeForm {
         "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
         "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SE", "TO"};
     
+    private final String convenioList[] = {"Aprovado", "Reprovado"};
+    
     /**
      * Inicializa a classe controlle. Este método é chamado automaticamente
      * após o arquivo fxml ter sido carregado.
@@ -49,6 +51,7 @@ public class FaculdadeForm {
     public void initialize() {        
         // Carregando lista de estados na Box.
         ufBox.setItems(FXCollections.observableArrayList(estados));
+        convenioBox.setItems(FXCollections.observableArrayList(convenioList));
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -71,10 +74,11 @@ public class FaculdadeForm {
         this.faculdade.setCNPJ(cnpjField.getText());
         this.faculdade.setNome(nomeField.getText());
         this.faculdade.setBairro(bairroField.getText());
-        this.faculdade.setConvenio("");
+        this.faculdade.setConvenio(convenioBox.getSelectionModel().getSelectedItem());
         this.faculdade.setNumero(Integer.parseInt(numeroField.getText()));
         this.faculdade.setRua(logradouroField.getText());
-//        this.faculdade.setCidade(cidadeField.getText());
+        this.faculdade.setCidade(cidadeField.getText());
+        this.faculdade.setEstado(ufBox.getSelectionModel().getSelectedItem());
         
         this.dialogStage.close(); //fecha a janela
     }

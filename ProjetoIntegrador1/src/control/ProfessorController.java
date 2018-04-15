@@ -22,14 +22,12 @@ import javafx.stage.Stage;
  *
  * @author arthurcvm
  */
-public class TurmaController {
+public class ProfessorController {
     private JFXTextField pesquisarField;
     private JFXComboBox faculdadeBox;
-    private TableView turmaTable;
-    private TableColumn descricaoColumn;
-    private TableColumn cursoColumn;
-    private TableColumn chColumn;
-    private TableColumn semestreColumn;
+    private TableView professorTable;
+    private TableColumn nomeColumn;
+    private TableColumn cpfColumn;
     
     private BorderPane primaryStage;
     
@@ -48,9 +46,9 @@ public class TurmaController {
     
     @FXML
     private void adicionar(){
-        //Turma turma = new Turma();
+        //Professor professor = new Professor();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TurmaForm.fxml")); //Carrega o arquivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProfessorForm.fxml")); //Carrega o arquivo FXML
             AnchorPane page = (AnchorPane) loader.load();
             Stage stage = new Stage(); //Cria um novo Stage
             stage.initOwner(primaryStage.getScene().getWindow()); //Seta um stage pai
@@ -58,9 +56,9 @@ public class TurmaController {
             Scene scene = new Scene(page);
             stage.setScene(scene);
             
-            TurmaForm controller = loader.getController(); //Puxa a referência do controller instanciado
+            ProfessorForm controller = loader.getController(); //Puxa a referência do controller instanciado
             //controller.setDialogStage(stage);
-            //controller.setTurma(turma);
+            //controller.setProfessor(professor);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
         
