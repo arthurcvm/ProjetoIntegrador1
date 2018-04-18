@@ -34,8 +34,8 @@ public class DisciplinaForm {
      * após o arquivo fxml ter sido carregado.
      */
     @FXML
-    public void initialize() {        
-        // Carregando lista de estados na Box.
+    public void initialize() {
+        
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -44,6 +44,13 @@ public class DisciplinaForm {
 
     public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
+        if(disciplina.getNome() != null){
+            this.nomeField.setText(disciplina.getNome());
+            this.abreviacaoField.setText(disciplina.getAbreviacao());
+            this.chField.setText(String.valueOf(disciplina.getCH()));
+            //this.semestreField;
+            //this.professorField;
+        }
     }
     
     @FXML

@@ -60,6 +60,16 @@ public class FaculdadeForm {
 
     public void setFaculdade(Faculdade faculdade) {
         this.faculdade = faculdade;
+        if(faculdade.getNome() != null){
+            this.nomeField.setText(faculdade.getNome());
+            this.cnpjField.setText(faculdade.getCNPJ());
+            this.logradouroField.setText(faculdade.getRua());
+            this.cidadeField.setText(faculdade.getCidade());
+            this.bairroField.setText(faculdade.getBairro());
+            this.numeroField.setText(String.valueOf(faculdade.getNumero()));
+            //this.ufBox.setValue(faculdade.getEstado());
+            //this.convenioBox.setValue(faculdade.getConvenio());
+        }
     }
     
     @FXML

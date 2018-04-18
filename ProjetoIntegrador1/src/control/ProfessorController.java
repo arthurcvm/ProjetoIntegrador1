@@ -8,6 +8,9 @@ package control;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Professor;
+import model.ProfessorGenerico;
 
 /**
  *
@@ -25,9 +30,12 @@ import javafx.stage.Stage;
 public class ProfessorController {
     private JFXTextField pesquisarField;
     private JFXComboBox faculdadeBox;
-    private TableView professorTable;
-    private TableColumn nomeColumn;
-    private TableColumn cpfColumn;
+    private TableView<ProfessorGenerico> professorTable;
+    private TableColumn<ProfessorGenerico, String> nomeColumn;
+    private TableColumn<ProfessorGenerico, String> cpfColumn;
+    
+    private ArrayList<ProfessorGenerico> professorGenericoList = new ArrayList<ProfessorGenerico>();
+    private ObservableList<ProfessorGenerico> genericos;
     
     private BorderPane primaryStage;
     
@@ -37,11 +45,19 @@ public class ProfessorController {
      */
     @FXML
     public void initialize() {
+        nomeColumn.setCellValueFactory(cellData -> cellData.getValue().getNome());
+        cpfColumn.setCellValueFactory(cellData -> cellData.getValue().getCpf());
         
     }
 
     public void setPrimaryStage(BorderPane primaryStage) {
         this.primaryStage = primaryStage;
+    }
+
+    public void setProfessorGenericoList(ArrayList<ProfessorGenerico> professorGenericoList) {
+        this.professorGenericoList = professorGenericoList;
+        this.genericos = FXCollections.observableArrayList(this.professorGenericoList);
+        professorTable.setItems(genericos); 
     }
     
     @FXML
@@ -57,7 +73,7 @@ public class ProfessorController {
             stage.setScene(scene);
             
             ProfessorForm controller = loader.getController(); //Puxa a referência do controller instanciado
-            //controller.setDialogStage(stage);
+            controller.setDialogStage(stage);
             //controller.setProfessor(professor);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
@@ -69,16 +85,19 @@ public class ProfessorController {
     
     @FXML
     private void excluir(){
-        
+        Professor professor = professorTable.getSelectionModel().getSelectedItem().getProfessor();
+        //Exclui no banco
     }
     
     @FXML
     private void editar(){
-        
+        Professor professor = professorTable.getSelectionModel().getSelectedItem().getProfessor();
+        //Edita no banco
     }
     
     @FXML
     private void detalhes(){
-        
+        Professor professor = professorTable.getSelectionModel().getSelectedItem().getProfessor();
+        //Abre a janela de cadastro bloqueada
     }
 }

@@ -41,6 +41,11 @@ public class CursoForm {
 
     public void setCurso(Curso curso) {
         this.curso = curso;
+        if(curso.getNomeCurso() != null){
+            this.nomeField.setText(curso.getNomeCurso());
+            //this.faculdadeBox.setValue();
+            this.qtdSemestresField.setText(String.valueOf(curso.getTempoCurso()));
+        }
     }
     
     @FXML

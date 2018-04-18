@@ -8,6 +8,9 @@ package control;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Aluno;
+import model.AlunoGenerico;
 
 /**
  *
@@ -26,10 +30,13 @@ import model.Aluno;
 public class AlunoController {
     private JFXTextField pesquisarField;
     private JFXComboBox faculdadeBox;
-    private TableView alunoTable;
-    private TableColumn nomeColumn;
-    private TableColumn cpfColumn;
-    private TableColumn rgColumn;
+    private TableView<AlunoGenerico> alunoTable;
+    private TableColumn<AlunoGenerico, String> nomeColumn;
+    private TableColumn<AlunoGenerico, String> cpfColumn;
+    private TableColumn<AlunoGenerico, String> rgColumn;
+    
+    private ArrayList<AlunoGenerico> alunoGenericoList = new ArrayList<AlunoGenerico>();
+    private ObservableList<AlunoGenerico> genericos;
     
     private BorderPane primaryStage;
     
@@ -39,11 +46,19 @@ public class AlunoController {
      */
     @FXML
     public void initialize() {
-        
+        nomeColumn.setCellValueFactory(cellData -> cellData.getValue().getNome());
+        cpfColumn.setCellValueFactory(cellData -> cellData.getValue().getCpf());
+        rgColumn.setCellValueFactory(cellData -> cellData.getValue().getRg());
     }
 
     public void setPrimaryStage(BorderPane primaryStage) {
         this.primaryStage = primaryStage;
+    }
+
+    public void setAlunoGenericoList(ArrayList<AlunoGenerico> alunoGenericoList) {
+        this.alunoGenericoList = alunoGenericoList;
+        this.genericos = FXCollections.observableArrayList(this.alunoGenericoList);
+        alunoTable.setItems(genericos); 
     }
     
     @FXML
@@ -59,7 +74,7 @@ public class AlunoController {
             stage.setScene(scene);
             
             AlunoForm controller = loader.getController(); //Puxa a referência do controller instanciado
-            //controller.setDialogStage(stage);
+            controller.setDialogStage(stage);
             //controller.setAluno(aluno);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
@@ -71,16 +86,19 @@ public class AlunoController {
     
     @FXML
     private void excluir(){
-        
+        Aluno aluno = alunoTable.getSelectionModel().getSelectedItem().getAluno();
+        //Exclui no banco
     }
     
     @FXML
     private void editar(){
-        
+      Aluno aluno = alunoTable.getSelectionModel().getSelectedItem().getAluno();
+      //Edita no banco
     }
     
     @FXML
     private void detalhes(){
-        
+        Aluno aluno = alunoTable.getSelectionModel().getSelectedItem().getAluno();
+        //Abre a janela de cadastro bloqueada
     }
 }

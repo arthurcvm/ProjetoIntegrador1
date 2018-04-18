@@ -7,9 +7,9 @@ package control;
 
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Faculdade;
+import model.FaculdadeGenerica;
 
 /**
  *
@@ -27,8 +28,11 @@ import model.Faculdade;
  */
 public class FaculdadeController {
     private JFXTextField pesquisarField;
-    private TableView faculdadeTable;
-    private TableColumn faculdadeColumn;
+    private TableView<FaculdadeGenerica> faculdadeTable;
+    private TableColumn<FaculdadeGenerica, String> faculdadeColumn;
+    
+    private ArrayList<FaculdadeGenerica> faculdadeGenericaList = new ArrayList<FaculdadeGenerica>();
+    private ObservableList<FaculdadeGenerica> genericas;
     
     private BorderPane primaryStage;
     
@@ -38,11 +42,18 @@ public class FaculdadeController {
      */
     @FXML
     public void initialize() {
-        
+        // Inicializa a tablela de faculdade com suas colunas.
+        faculdadeColumn.setCellValueFactory(cellData -> cellData.getValue().getNome());        
     }
 
     public void setPrimaryStage(BorderPane primaryStage) {
         this.primaryStage = primaryStage;
+    }
+
+    public void setFaculdadeGenericaList(ArrayList<FaculdadeGenerica> faculdadeGenericaList) {
+        this.faculdadeGenericaList = faculdadeGenericaList;
+        this.genericas = FXCollections.observableArrayList(this.faculdadeGenericaList);
+        faculdadeTable.setItems(genericas); 
     }
     
     @FXML
@@ -62,6 +73,10 @@ public class FaculdadeController {
             controller.setFaculdade(faculdade);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
+            
+            if(faculdade.getCNPJ() != null){
+                //Aqui cadastra no banco
+            }
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,16 +85,19 @@ public class FaculdadeController {
     
     @FXML
     private void excluir(){
-        
+        Faculdade faculdade = this.faculdadeTable.getSelectionModel().getSelectedItem().getFaculdade();
+        //Aqui exclui a Faculdade do banco
     }
     
     @FXML
     private void editar(){
-        
+        Faculdade faculdade = this.faculdadeTable.getSelectionModel().getSelectedItem().getFaculdade();
+        //Aqui atualiza a Faculdade no banco
     }
     
     @FXML
     private void detalhes(){
-        
+        Faculdade faculdade = this.faculdadeTable.getSelectionModel().getSelectedItem().getFaculdade();
+        //Abre a janela de cadastro bloqueada
     }
 }

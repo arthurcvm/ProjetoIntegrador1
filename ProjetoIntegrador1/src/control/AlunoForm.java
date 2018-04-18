@@ -33,8 +33,8 @@ public class AlunoForm {
      * após o arquivo fxml ter sido carregado.
      */
     @FXML
-    public void initialize() {        
-        // Carregando lista de estados na Box.
+    public void initialize() {
+        
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -43,6 +43,12 @@ public class AlunoForm {
 
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
+        if(aluno.getNome() != null){
+            this.nomeField.setText(aluno.getNome());
+            this.cpfField.setText(aluno.getCpf());
+            this.rgField.setText(aluno.getRG());
+            //this.senhaField.setText("");
+        }
     }
     
     @FXML

@@ -40,6 +40,11 @@ public class TurmaForm {
 
     public void setTurma(Turma turma) {
         this.turma = turma;
+        if(turma.getDescricao() != null){
+            this.descricaoField.setText(turma.getDescricao());
+            //this.cursoField.setText(turma.getCurso());
+            //this.semestreField.setText(turma.getSemestre());
+        }
     }
     
     @FXML

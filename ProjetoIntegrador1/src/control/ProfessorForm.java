@@ -41,6 +41,11 @@ public class ProfessorForm {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+        if(professor.getNome() != null){
+            this.nomeField.setText(professor.getNome());
+            this.cpfField.setText(professor.getCpf());
+            //this.senhaField.setText("");
+        }
     }
     
     @FXML
