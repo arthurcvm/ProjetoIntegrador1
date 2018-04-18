@@ -77,6 +77,10 @@ public class ProfessorController {
             //controller.setProfessor(professor);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
+            
+            /*if(professor.getNome() != null){
+                //salva no banco
+            }*/
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,12 +96,57 @@ public class ProfessorController {
     @FXML
     private void editar(){
         Professor professor = professorTable.getSelectionModel().getSelectedItem().getProfessor();
-        //Edita no banco
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProfessorForm.fxml")); //Carrega o arquivo FXML
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage stage = new Stage(); //Cria um novo Stage
+            stage.initOwner(primaryStage.getScene().getWindow()); //Seta um stage pai
+            stage.initModality(Modality.WINDOW_MODAL);
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+            
+            ProfessorForm controller = loader.getController(); //Puxa a referência do controller instanciado
+            controller.setDialogStage(stage);
+            controller.setProfessor(professor);
+            
+            stage.showAndWait(); //Exibe janela e pausa esta thread
+            
+            if(professor.getNome() != null){
+                //salva no banco
+            }
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     @FXML
     private void detalhes(){
         Professor professor = professorTable.getSelectionModel().getSelectedItem().getProfessor();
-        //Abre a janela de cadastro bloqueada
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProfessorForm.fxml")); //Carrega o arquivo FXML
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage stage = new Stage(); //Cria um novo Stage
+            stage.initOwner(primaryStage.getScene().getWindow()); //Seta um stage pai
+            stage.initModality(Modality.WINDOW_MODAL);
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+            
+            ProfessorForm controller = loader.getController(); //Puxa a referência do controller instanciado
+            controller.setDialogStage(stage);
+            controller.setProfessor(professor);
+            controller.setBlock();
+            
+            stage.showAndWait(); //Exibe janela e pausa esta thread
+            
+            if(professor.getNome() != null){
+                //salva no banco
+            }
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

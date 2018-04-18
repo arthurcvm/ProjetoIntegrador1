@@ -53,6 +53,16 @@ public class DisciplinaForm {
         }
     }
     
+    public void setBlock(){
+        this.nomeField.setEditable(false);
+        this.chField.setEditable(false);
+        this.abreviacaoField.setEditable(false);
+        this.professorField.setEditable(false);
+        this.semestreField.setEditable(false);
+        
+        disciplina.setNome(null);
+    }
+    
     @FXML
     private void cancelar(){
         disciplina.setNome(null);

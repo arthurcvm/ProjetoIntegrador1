@@ -72,6 +72,19 @@ public class FaculdadeForm {
         }
     }
     
+    public void setBlock(){
+        this.nomeField.setText(faculdade.getNome());
+        this.cnpjField.setEditable(false);
+        this.logradouroField.setEditable(false);
+        this.cidadeField.setEditable(false);
+        this.bairroField.setEditable(false);
+        this.numeroField.setEditable(false);
+        this.ufBox.setEditable(false);
+        this.convenioBox.setEditable(false);
+        
+        faculdade.setNome(null);
+    }
+    
     @FXML
     private void cancelar(){
         faculdade.setCNPJ(null);

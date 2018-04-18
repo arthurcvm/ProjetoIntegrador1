@@ -80,6 +80,10 @@ public class TurmaController {
             controller.setTurma(turma);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
+            
+            if(turma.getDescricao() != null){
+                //salva no banco
+            }
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,12 +99,53 @@ public class TurmaController {
     @FXML
     private void editar(){
         Turma turma = turmaTable.getSelectionModel().getSelectedItem().getTurma();
-        //Edita no banco
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TurmaForm.fxml")); //Carrega o arquivo FXML
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage stage = new Stage(); //Cria um novo Stage
+            stage.initOwner(primaryStage.getScene().getWindow()); //Seta um stage pai
+            stage.initModality(Modality.WINDOW_MODAL);
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+            
+            TurmaForm controller = loader.getController(); //Puxa a referência do controller instanciado
+            controller.setDialogStage(stage);
+            controller.setTurma(turma);
+            
+            stage.showAndWait(); //Exibe janela e pausa esta thread
+            
+            if(turma.getDescricao() != null){
+                //salva no banco
+            }
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     @FXML
     private void detalhes(){
         Turma turma = turmaTable.getSelectionModel().getSelectedItem().getTurma();
-        //Abre a janela de cadastro bloqueada
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TurmaForm.fxml")); //Carrega o arquivo FXML
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage stage = new Stage(); //Cria um novo Stage
+            stage.initOwner(primaryStage.getScene().getWindow()); //Seta um stage pai
+            stage.initModality(Modality.WINDOW_MODAL);
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+            
+            TurmaForm controller = loader.getController(); //Puxa a referência do controller instanciado
+            controller.setDialogStage(stage);
+            controller.setTurma(turma);
+            controller.setBlock();
+            
+            stage.showAndWait(); //Exibe janela e pausa esta thread
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

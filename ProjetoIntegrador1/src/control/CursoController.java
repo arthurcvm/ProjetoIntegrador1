@@ -76,6 +76,10 @@ public class CursoController {
             controller.setCurso(curso);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
+            
+            if(curso.getNomeCurso() != null){
+                //salva no banco
+            }
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,13 +95,54 @@ public class CursoController {
     @FXML
     private void editar(){
         Curso curso = cursoTable.getSelectionModel().getSelectedItem().getCurso();
-        //Edita no banco
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CursoForm.fxml")); //Carrega o arquivo FXML
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage stage = new Stage(); //Cria um novo Stage
+            stage.initOwner(primaryStage.getScene().getWindow()); //Seta um stage pai
+            stage.initModality(Modality.WINDOW_MODAL);
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+            
+            CursoForm controller = loader.getController(); //Puxa a referência do controller instanciado
+            controller.setDialogStage(stage);
+            controller.setCurso(curso);
+            
+            stage.showAndWait(); //Exibe janela e pausa esta thread
+            
+            if(curso.getNomeCurso() != null){
+                //salva no banco
+            }
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     @FXML
     private void detalhes(){
         Curso curso = cursoTable.getSelectionModel().getSelectedItem().getCurso();
-        //Abre a janela de cadastro bloqueada
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CursoForm.fxml")); //Carrega o arquivo FXML
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage stage = new Stage(); //Cria um novo Stage
+            stage.initOwner(primaryStage.getScene().getWindow()); //Seta um stage pai
+            stage.initModality(Modality.WINDOW_MODAL);
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+            
+            CursoForm controller = loader.getController(); //Puxa a referência do controller instanciado
+            controller.setDialogStage(stage);
+            controller.setCurso(curso);
+            controller.setBlock();
+            
+            stage.showAndWait(); //Exibe janela e pausa esta thread
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         
     }
 }

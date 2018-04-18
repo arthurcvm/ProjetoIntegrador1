@@ -47,6 +47,14 @@ public class TurmaForm {
         }
     }
     
+    public void setBlock(){
+        this.descricaoField.setEditable(false);
+        this.cursoField.setEditable(false);
+        this.semestreField.setEditable(false);
+        
+        turma.setDescricao(null);
+    }
+    
     @FXML
     private void cancelar(){
         turma.setDescricao(null);

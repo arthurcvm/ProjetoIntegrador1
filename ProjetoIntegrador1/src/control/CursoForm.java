@@ -48,6 +48,14 @@ public class CursoForm {
         }
     }
     
+    public void setBlock(){
+        this.nomeField.setEditable(false);
+        this.qtdSemestresField.setEditable(false);
+        this.faculdadeBox.setEditable(false);
+        
+        curso.setNomeCurso(null);
+    }
+    
     @FXML
     private void cancelar(){
         curso.setNomeCurso(null);

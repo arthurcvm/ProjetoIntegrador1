@@ -48,6 +48,14 @@ public class ProfessorForm {
         }
     }
     
+    public void setBlock(){
+        this.nomeField.setEditable(false);
+        this.cpfField.setEditable(false);
+        this.senhaField.setEditable(false);
+        
+        professor.setNome(null);
+    }
+    
     @FXML
     private void cancelar(){
         //curso.setNome(null);

@@ -51,6 +51,14 @@ public class AlunoForm {
         }
     }
     
+    public void setBlock(){
+        this.nomeField.setEditable(false);
+        this.cpfField.setEditable(false);
+        this.rgField.setEditable(false);
+        this.senhaField.setEditable(false);
+        aluno.setNome(null);
+    }
+    
     @FXML
     private void cancelar(){
         aluno.setNome(null);
