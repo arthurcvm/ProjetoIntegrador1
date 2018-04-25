@@ -82,7 +82,6 @@ public class FaculdadeController {
                 FaculdadeDAO dao = new FaculdadeDAO();
                 dao.insert(faculdade);
             }
-        
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,6 +91,18 @@ public class FaculdadeController {
     private void excluir(){
         Faculdade faculdade = this.faculdadeTable.getSelectionModel().getSelectedItem().getFaculdade();
         //Aqui exclui a Faculdade do banco
+        FaculdadeDAO dao = new FaculdadeDAO();
+        dao.delete(faculdade.getIdFaculdade());
+//        System.out.println(faculdade.getIdFaculdade());
+//        System.out.println(faculdade.getNome());
+//        System.out.println(faculdade.getCNPJ());
+//        System.out.println(faculdade.getRua());
+//        System.out.println(faculdade.getNumero());
+//        System.out.println(faculdade.getBairro());
+//        System.out.println(faculdade.getConvenio());
+//        System.out.println(faculdade.getCidade());
+//        System.out.println(faculdade.getEstado());
+//        System.out.println(faculdade);
     }
     
     @FXML

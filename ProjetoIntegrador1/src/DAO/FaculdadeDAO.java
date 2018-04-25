@@ -40,23 +40,22 @@ public class FaculdadeDAO {
             stmt.setString(8, faculdade.getEstado());
         
             stmt.execute();
-            System.out.println("Gravado");
+//            System.out.println("Gravado");
         } catch (SQLException ex) {
             Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void delete(int id) throws SQLException{
-        String delete = "DELETE FROM faculdade WHERE ";
-        delete+="id=?";
-        
+    public void delete(int id){
        try {
+            String delete = "DELETE FROM faculdade WHERE ";
+            delete+="idFACULDADE=?";
             PreparedStatement stmt = this.con.prepareStatement(delete);
             stmt.setInt(1, id);
 
             stmt.execute();
             stmt.close();
             this.con.close();
-            System.out.println("Deletado");
+//            System.out.println("Deletado");
         } catch (SQLException ex) {
             Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,7 +70,9 @@ public class FaculdadeDAO {
                 Faculdade facul = new Faculdade();
                 facul.setIdFaculdade(rs.getInt("idFACULDADE"));
                 facul.setNome(rs.getString("nome"));
-                facul.setIdFaculdade(rs.getInt("numero"));
+                facul.setCNPJ(rs.getString("cnpj"));
+                facul.setRua(rs.getString("rua"));
+                facul.setNumero(rs.getInt("numero"));
                 facul.setBairro(rs.getString("bairro"));
                 facul.setConvenio(rs.getString("convenio"));
                 facul.setCidade(rs.getString("cidade"));
