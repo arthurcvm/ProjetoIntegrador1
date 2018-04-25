@@ -5,6 +5,7 @@
  */
 package control;
 
+import DAO.FaculdadeDAO;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,8 +28,11 @@ import model.FaculdadeGenerica;
  * @author arthurcvm
  */
 public class FaculdadeController {
+    @FXML
     private JFXTextField pesquisarField;
+    @FXML
     private TableView<FaculdadeGenerica> faculdadeTable;
+    @FXML
     private TableColumn<FaculdadeGenerica, String> faculdadeColumn;
     
     private ArrayList<FaculdadeGenerica> faculdadeGenericaList = new ArrayList<FaculdadeGenerica>();
@@ -75,7 +79,8 @@ public class FaculdadeController {
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
             if(faculdade.getNome() != null){
-                //Aqui cadastra no banco
+                FaculdadeDAO dao = new FaculdadeDAO();
+                dao.insert(faculdade);
             }
         
         } catch (IOException e) {

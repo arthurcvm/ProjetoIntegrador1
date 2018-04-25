@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Faculdade;
@@ -23,28 +24,25 @@ public class FaculdadeDAO {
     public FaculdadeDAO(){
         this.con = new ConnectionFacotory().getConnection();
     }
-    public void insert(Faculdade faculdade) throws SQLException{
-        String insert = "INSERT INTO faculdade (nome, cnpj, rua, numero, bairro, convenio, cidade, estado)";
-                insert += " VALUES(?,?,?,?,?,?,?,?)";
-                
-        PreparedStatement stmt = this.con.prepareStatement(insert);
-        stmt.setString(1, faculdade.getNome());
-        stmt.setString(2, faculdade.getCNPJ());
-        stmt.setString(3, faculdade.getRua());
-        stmt.setInt(4, faculdade.getNumero());
-        stmt.setString(5, faculdade.getBairro());
-        stmt.setString(6, faculdade.getConvenio());
-        stmt.setString(7, faculdade.getCidade());
-        stmt.setString(8, faculdade.getEstado());
-        
+    public void insert(Faculdade faculdade){
         try {
+            String insert = "INSERT INTO faculdade (nome, cnpj, rua, numero, bairro, convenio, cidade, estado)";
+                    insert += " VALUES(?,?,?,?,?,?,?,?)";
+
+            PreparedStatement stmt = this.con.prepareStatement(insert);
+            stmt.setString(1, faculdade.getNome());
+            stmt.setString(2, faculdade.getCNPJ());
+            stmt.setString(3, faculdade.getRua());
+            stmt.setInt(4, faculdade.getNumero());
+            stmt.setString(5, faculdade.getBairro());
+            stmt.setString(6, faculdade.getConvenio());
+            stmt.setString(7, faculdade.getCidade());
+            stmt.setString(8, faculdade.getEstado());
+        
             stmt.execute();
             System.out.println("Gravado");
         } catch (SQLException ex) {
             Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            stmt.close();
-            this.con.close();
         }
     }
     public void delete(int id) throws SQLException{
@@ -63,30 +61,28 @@ public class FaculdadeDAO {
             Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void lista() throws SQLException{
-        String select = "SELECT * FROM faculdade";
-        PreparedStatement stmt = this.con.prepareStatement(select);
+    public ArrayList<Faculdade> lista(){
+        ArrayList<Faculdade> array = new ArrayList();
         try {
+            String select = "SELECT * FROM faculdade";
+            PreparedStatement stmt = this.con.prepareStatement(select);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                String nome = rs.getString("nome");
-                String cnpj = rs.getString("cnpj");
-                String rua = rs.getString("rua");
-                int numero = rs.getInt("numero");
-                String bairro = rs.getString("bairro");
-                String convenio = rs.getString("convenio");
-                String cidade = rs.getString("cidade");
-                String estado = rs.getString("estado");
-                System.out.println("Nome: " + nome +" | CNPJ: " + cnpj + " | "
-                        + "Rua: " + rua  + " | Número: " + numero +" | Bairro: "
-                        + bairro + " | Convênio: " + convenio  + " | Cidade: " + cidade + " | Estado: " + estado  + " |");
+                Faculdade facul = new Faculdade();
+                facul.setIdFaculdade(rs.getInt("idFACULDADE"));
+                facul.setNome(rs.getString("nome"));
+                facul.setIdFaculdade(rs.getInt("numero"));
+                facul.setBairro(rs.getString("bairro"));
+                facul.setConvenio(rs.getString("convenio"));
+                facul.setCidade(rs.getString("cidade"));
+                facul.setEstado(rs.getString("estado"));
+                array.add(facul);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
-            stmt.close();
-            this.con.close();
-        }  
+            } catch (SQLException ex) {
+                Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        return array;
     }
     public void buscadado(String dado) throws SQLException{
         String pesq = "SELECT nome, cnpj, rua, numero, bairro, convenio, cidade, estado FROM faculdade WHERE nome LIKE '%"+dado+"%'";

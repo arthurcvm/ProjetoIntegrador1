@@ -10,10 +10,6 @@ package model;
  * @author csarp
  */
 public class Aluno extends Pessoa{
-    
-    public Aluno(String nome, String cpf) {
-        super(nome, cpf);
-    }
     private String RG;
 
     public String getRG() {

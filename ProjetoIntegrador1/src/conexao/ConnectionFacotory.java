@@ -15,7 +15,7 @@ import java.sql.DriverManager;
 public class ConnectionFacotory {
     public Connection getConnection(){
         try {
-            return (Connection) DriverManager.getConnection("jdbc:mysql://localhost/Teste", "root", "1234");
+            return (Connection) DriverManager.getConnection("jdbc:mysql://localhost/pintegrador", "root", "");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

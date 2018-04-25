@@ -23,23 +23,22 @@ public class AlunoDAO {
     public AlunoDAO(){
         this.con = new ConnectionFacotory().getConnection();
     }
-    public void insert(Aluno Aluno) throws SQLException{
-        String insert = "INSERT INTO aluno (nome, cpf,rg)";
-                insert += " VALUES(?,?,?)";
-                
-        PreparedStatement stmt = this.con.prepareStatement(insert);
-        stmt.setString(1, Aluno.getNome());
-        stmt.setString(2, Aluno.getCpf());
-        stmt.setString(3, Aluno.getRG());
-        
+    public void insert(Aluno Aluno){
         try {
+            String insert = "INSERT INTO aluno (nome, cpf,rg)";
+                    insert += " VALUES(?,?,?)";
+
+            PreparedStatement stmt = this.con.prepareStatement(insert);
+            stmt.setString(1, Aluno.getNome());
+            stmt.setString(2, Aluno.getCpf());
+            stmt.setString(3, Aluno.getRG());
+        
             stmt.execute();
             System.out.println("Gravado");
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
             stmt.close();
             this.con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void delete(int id) throws SQLException{

@@ -5,9 +5,11 @@
  */
 package control;
 
+import DAO.AlunoDAO;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -62,8 +64,8 @@ public class AlunoController {
     }
     
     @FXML
-    private void adicionar(){
-        //Aluno aluno = new Aluno();
+    private void adicionar() throws SQLException{
+        Aluno aluno = new Aluno();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AlunoForm.fxml")); //Carrega o arquivo FXML
             AnchorPane page = (AnchorPane) loader.load();
@@ -75,13 +77,14 @@ public class AlunoController {
             
             AlunoForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
-            //controller.setAluno(aluno);
+            controller.setAluno(aluno);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
-            /*if(aluno.getNome != null){
-                //salva no banco
-            }*/
+            if(aluno.getNome() != null){
+                AlunoDAO dao = new AlunoDAO();
+                dao.insert(aluno);
+            }
         
         } catch (IOException e) {
             e.printStackTrace();

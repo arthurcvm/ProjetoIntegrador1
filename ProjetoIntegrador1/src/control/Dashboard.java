@@ -5,6 +5,7 @@
  */
 package control;
 
+import DAO.FaculdadeDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -43,7 +44,8 @@ public class Dashboard {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Faculdade.fxml"));
             AnchorPane pane = (AnchorPane) loader.load();
             
-            ArrayList<Faculdade> faculdadeList = new ArrayList<>(); //Pega do banco
+            FaculdadeDAO dao = new FaculdadeDAO();
+            ArrayList<Faculdade> faculdadeList = dao.lista();
             ArrayList<FaculdadeGenerica> faculdadeGenericaList = new ArrayList<>();
             for(Faculdade f: faculdadeList){
                 faculdadeGenericaList.add(new FaculdadeGenerica(f));
