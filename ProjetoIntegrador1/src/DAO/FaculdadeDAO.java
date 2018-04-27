@@ -79,9 +79,9 @@ public class FaculdadeDAO {
                 facul.setEstado(rs.getString("estado"));
                 array.add(facul);
             }
-            } catch (SQLException ex) {
+        } catch (SQLException ex) {
                 Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        }
         
         return array;
     }
@@ -110,5 +110,26 @@ public class FaculdadeDAO {
             stmt.close();
             this.con.close();
         }           
+    }
+    
+    public void edit(Faculdade fac){
+        try {
+            String update = "UPDATE faculdade SET nome=?, cnpj=?, rua=?, numero=?, bairro=?,";
+                update+="convenio=?, cidade=?, estado=? WHERE idFACULDADE=?";
+            PreparedStatement stmt = this.con.prepareStatement(update);
+            stmt.setString(1, fac.getNome());
+            stmt.setString(2, fac.getCNPJ());
+            stmt.setString(3, fac.getRua());
+            stmt.setInt(4, fac.getNumero());
+            stmt.setString(5, fac.getBairro());
+            stmt.setString(6, fac.getConvenio());
+            stmt.setString(7, fac.getCidade());
+            stmt.setString(8, fac.getEstado());
+            stmt.setInt(9, fac.getIdFaculdade());
+            stmt.execute();
+//            System.out.println("Atuaizado");
+        } catch (SQLException ex) {
+            Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
