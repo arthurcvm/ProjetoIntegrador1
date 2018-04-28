@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Faculdade;
+import model.FaculdadeGenerica;
 
 /**
  *
@@ -45,6 +46,30 @@ public class FaculdadeDAO {
             Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void update(Faculdade faculdade){
+        try {
+            String insert = "UPDATE faculdade SET (nome, cnpj, rua, numero, bairro, convenio, cidade, estado WHERE ID)";
+                    insert += " VALUES(?,?,?,?,?,?,?,?,?)";
+
+            PreparedStatement stmt = this.con.prepareStatement(insert);
+            stmt.setString(1, faculdade.getNome());
+            stmt.setString(2, faculdade.getCNPJ());
+            stmt.setString(3, faculdade.getRua());
+            stmt.setInt(4, faculdade.getNumero());
+            stmt.setString(5, faculdade.getBairro());
+            stmt.setString(6, faculdade.getConvenio());
+            stmt.setString(7, faculdade.getCidade());
+            stmt.setString(8, faculdade.getEstado());
+            stmt.setInt(9, faculdade.getIdFaculdade());
+        
+            stmt.executeUpdate();
+            System.out.println("Gravado");
+        } catch (SQLException ex) {
+            Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void delete(int id){
        try {
             String delete = "DELETE FROM faculdade WHERE ";
@@ -84,6 +109,16 @@ public class FaculdadeDAO {
         }
         
         return array;
+    }
+    
+    public ArrayList<FaculdadeGenerica> listaGen(){
+        ArrayList<Faculdade> faculdadeList = lista();
+        ArrayList<FaculdadeGenerica> faculdadeGenericaList = new ArrayList();
+        for(Faculdade f: faculdadeList){
+                faculdadeGenericaList.add(new FaculdadeGenerica(f));
+            }
+        
+        return faculdadeGenericaList;
     }
     public void buscadado(String dado) throws SQLException{
         String pesq = "SELECT nome, cnpj, rua, numero, bairro, convenio, cidade, estado FROM faculdade WHERE nome LIKE '%"+dado+"%'";
