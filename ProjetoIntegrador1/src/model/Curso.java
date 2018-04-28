@@ -11,21 +11,14 @@ package model;
  */
 public class Curso {
     private int idCurso;
-    private int faculdade;
     private String nomeCurso;
-    private int tempoCurso;
+    private int faculdade;
+    private int qtdSemestres;
     
     public Curso() {
         
     }
     
-     public Curso(int idCurso, int faculdade, String nomeCurso, int tempoCurso) {
-         this.idCurso = idCurso;
-         this.faculdade = faculdade;
-         this.nomeCurso = nomeCurso;
-         this.tempoCurso = tempoCurso;
-    }
-
     public int getIdCurso() {
         return idCurso;
     }
@@ -50,13 +43,11 @@ public class Curso {
         this.nomeCurso = nomeCurso;
     }
 
-    public int getTempoCurso() {
-        return tempoCurso;
+    public int getQtdSemestres() {
+        return qtdSemestres;
     }
 
-    public void setTempoCurso(int tempoCurso) {
-        this.tempoCurso = tempoCurso;
+    public void setQtdSemestres(int qtdSemestres) {
+        this.qtdSemestres = qtdSemestres;
     }
-     
-    
 }

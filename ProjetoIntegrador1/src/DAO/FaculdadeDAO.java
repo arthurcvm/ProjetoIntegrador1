@@ -41,30 +41,6 @@ public class FaculdadeDAO {
             stmt.setString(8, faculdade.getEstado());
         
             stmt.execute();
-//            System.out.println("Gravado");
-        } catch (SQLException ex) {
-            Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void update(Faculdade faculdade){
-        try {
-            String insert = "UPDATE faculdade SET (nome, cnpj, rua, numero, bairro, convenio, cidade, estado WHERE ID)";
-                    insert += " VALUES(?,?,?,?,?,?,?,?,?)";
-
-            PreparedStatement stmt = this.con.prepareStatement(insert);
-            stmt.setString(1, faculdade.getNome());
-            stmt.setString(2, faculdade.getCNPJ());
-            stmt.setString(3, faculdade.getRua());
-            stmt.setInt(4, faculdade.getNumero());
-            stmt.setString(5, faculdade.getBairro());
-            stmt.setString(6, faculdade.getConvenio());
-            stmt.setString(7, faculdade.getCidade());
-            stmt.setString(8, faculdade.getEstado());
-            stmt.setInt(9, faculdade.getIdFaculdade());
-        
-            stmt.executeUpdate();
-            System.out.println("Gravado");
         } catch (SQLException ex) {
             Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -80,11 +56,11 @@ public class FaculdadeDAO {
             stmt.execute();
             stmt.close();
             this.con.close();
-//            System.out.println("Deletado");
         } catch (SQLException ex) {
             Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     public ArrayList<Faculdade> lista(){
         ArrayList<Faculdade> array = new ArrayList();
         try {

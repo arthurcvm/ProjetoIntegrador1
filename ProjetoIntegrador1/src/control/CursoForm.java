@@ -44,7 +44,7 @@ public class CursoForm {
         if(curso.getNomeCurso() != null){
             this.nomeField.setText(curso.getNomeCurso());
             //this.faculdadeBox.setValue();
-            this.qtdSemestresField.setText(String.valueOf(curso.getTempoCurso()));
+            this.qtdSemestresField.setText(String.valueOf(curso.getQtdSemestres()));
         }
     }
     
@@ -67,7 +67,7 @@ public class CursoForm {
     private void cadastrar(){
         this.curso.setNomeCurso(nomeField.getText());
 //        this.curso.setFaculdade(0);
-        this.curso.setTempoCurso(Integer.valueOf(qtdSemestresField.getText()));
+        this.curso.setQtdSemestres(Integer.valueOf(qtdSemestresField.getText()));
         //this.aluno.setSenha(senhaField.getText())
         
         this.dialogStage.close(); //fecha a janela

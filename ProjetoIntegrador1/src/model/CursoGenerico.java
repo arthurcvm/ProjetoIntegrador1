@@ -20,7 +20,7 @@ public class CursoGenerico {
     public CursoGenerico(Curso curso) {
         this.curso = curso;
         this.nome = new SimpleStringProperty(curso.getNomeCurso());
-        this.semestres = new SimpleIntegerProperty(curso.getTempoCurso());
+        this.semestres = new SimpleIntegerProperty(curso.getQtdSemestres());
     }
 
     public SimpleStringProperty getNome() {
