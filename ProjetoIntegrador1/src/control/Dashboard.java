@@ -45,11 +45,7 @@ public class Dashboard {
             AnchorPane pane = (AnchorPane) loader.load();
             
             FaculdadeDAO dao = new FaculdadeDAO();
-            ArrayList<Faculdade> faculdadeList = dao.lista();
-            ArrayList<FaculdadeGenerica> faculdadeGenericaList = new ArrayList<>();
-            for(Faculdade f: faculdadeList){
-                faculdadeGenericaList.add(new FaculdadeGenerica(f));
-            }
+            ArrayList<FaculdadeGenerica> faculdadeGenericaList = dao.listaGen();
             
             this.painel.setRight(pane);
             FaculdadeController controller = loader.getController();
@@ -114,9 +110,14 @@ public class Dashboard {
                 cursoGenericoList.add(new CursoGenerico(c));
             }
             
+            FaculdadeDAO dao = new FaculdadeDAO();
+            ArrayList<Faculdade> faculdadeList = dao.lista();
+            
             this.painel.setRight(pane);
             CursoController controller = loader.getController();
             controller.setPrimaryStage(painel);
+            controller.setCursoGenericoList(cursoGenericoList);
+            controller.setFaculdadeList(faculdadeList);
             
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);

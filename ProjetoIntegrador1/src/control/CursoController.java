@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,20 +24,31 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Curso;
 import model.CursoGenerico;
+import model.Faculdade;
 
 /**
  *
  * @author arthurcvm
  */
 public class CursoController {
+    @FXML
     private JFXTextField pesquisarField;
-    private JFXComboBox faculdadeBox;
+    @FXML
+    private JFXComboBox<String> faculdadeBox = new JFXComboBox<String>();
+    @FXML
     private TableView<CursoGenerico> cursoTable;
+    @FXML
     private TableColumn<CursoGenerico, String> cursoColumn;
+    @FXML
     private TableColumn<CursoGenerico, Integer> semestreColumn;
     
     private ArrayList<CursoGenerico> cursoGenericoList = new ArrayList<CursoGenerico>();
     private ObservableList<CursoGenerico> genericos;
+    
+    private ArrayList<Faculdade> faculdadeList = new ArrayList();
+    
+    private ArrayList<String> faculdadeNomes = new ArrayList();
+    private ArrayList<Integer> faculdadeIds = new ArrayList();
     
     private BorderPane primaryStage;
     
@@ -47,6 +60,24 @@ public class CursoController {
     public void initialize() {
         cursoColumn.setCellValueFactory(cellData -> cellData.getValue().getNome());
         semestreColumn.setCellValueFactory(cellData -> cellData.getValue().getSemestres().asObject());
+        
+        faculdadeBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                int index = faculdadeBox.getSelectionModel().getSelectedIndex(); //Pega o index da seleção pra buscar no array de IDs
+                int id = faculdadeIds.get(index);
+                int faculdadeId;
+                
+                for(Faculdade f: faculdadeList){
+                    if(f.getIdFaculdade() == id){
+                        faculdadeId = f.getIdFaculdade();
+                    }
+                }
+            }
+            
+            //Aqui filtra os cursos pelo id da faculdade e retorna um arraylist atualizado
+        });
+        
     }
 
     public void setPrimaryStage(BorderPane primaryStage) {
@@ -57,6 +88,17 @@ public class CursoController {
         this.cursoGenericoList = cursoGenericoList;
         this.genericos = FXCollections.observableArrayList(this.cursoGenericoList);
         cursoTable.setItems(genericos); 
+    }
+
+    public void setFaculdadeList(ArrayList<Faculdade> faculdadeList) {
+        this.faculdadeList = faculdadeList;
+        
+        for(Faculdade f: faculdadeList){
+            faculdadeNomes.add(f.getNome());
+            faculdadeIds.add(f.getIdFaculdade());
+        }
+        
+        faculdadeBox.setItems(FXCollections.observableArrayList(faculdadeNomes));
     }
     
     @FXML

@@ -85,6 +85,7 @@ public class FaculdadeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        recarregar();
     }
     
     @FXML
@@ -93,16 +94,7 @@ public class FaculdadeController {
         //Aqui exclui a Faculdade do banco
         FaculdadeDAO dao = new FaculdadeDAO();
         dao.delete(faculdade.getIdFaculdade());
-//        System.out.println(faculdade.getIdFaculdade());
-//        System.out.println(faculdade.getNome());
-//        System.out.println(faculdade.getCNPJ());
-//        System.out.println(faculdade.getRua());
-//        System.out.println(faculdade.getNumero());
-//        System.out.println(faculdade.getBairro());
-//        System.out.println(faculdade.getConvenio());
-//        System.out.println(faculdade.getCidade());
-//        System.out.println(faculdade.getEstado());
-//        System.out.println(faculdade);
+        recarregar();
     }
     
     @FXML
@@ -125,12 +117,14 @@ public class FaculdadeController {
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
             if(faculdade.getNome() != null){
-                //Aqui cadastra no banco
+                FaculdadeDAO dao = new FaculdadeDAO();
+                dao.update(faculdade);
             }
         
         } catch (IOException e) {
             e.printStackTrace();
         }
+        recarregar();
     }
     
     @FXML
@@ -156,5 +150,12 @@ public class FaculdadeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void recarregar() {
+        FaculdadeDAO dao = new FaculdadeDAO();
+        this.faculdadeGenericaList = dao.listaGen();
+        this.genericas = FXCollections.observableArrayList(this.faculdadeGenericaList);
+        faculdadeTable.setItems(genericas); 
     }
 }
