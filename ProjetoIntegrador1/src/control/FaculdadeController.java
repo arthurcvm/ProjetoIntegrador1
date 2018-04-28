@@ -94,7 +94,10 @@ public class FaculdadeController {
         //Aqui exclui a Faculdade do banco
         FaculdadeDAO dao = new FaculdadeDAO();
         dao.delete(faculdade.getIdFaculdade());
+
         recarregar();
+
+
     }
     
     @FXML
@@ -117,8 +120,13 @@ public class FaculdadeController {
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
             if(faculdade.getNome() != null){
-                FaculdadeDAO dao = new FaculdadeDAO();
-                dao.update(faculdade);
+
+                
+                
+
+                FaculdadeDAO edit = new FaculdadeDAO();
+                edit.edit(faculdade);
+
             }
         
         } catch (IOException e) {

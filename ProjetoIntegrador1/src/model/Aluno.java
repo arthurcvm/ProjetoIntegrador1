@@ -11,6 +11,7 @@ package model;
  */
 public class Aluno extends Pessoa{
     private String RG;
+    private int turma;
 
     public String getRG() {
         return RG;
@@ -19,5 +20,15 @@ public class Aluno extends Pessoa{
     public void setRG(String RG) {
         this.RG = RG;
     }
+
+    public int getTurma() {
+        return turma;
+    }
+
+    public void setTurma(int turma) {
+        this.turma = turma;
+    }
+    
+    
     
 }

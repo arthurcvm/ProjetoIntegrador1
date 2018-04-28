@@ -25,7 +25,7 @@ import model.TurmaGenerica;
 
 /**
  *
- * @author arthurcvm
+ * @author Mateus
  */
 public class TurmaController {
     private JFXTextField pesquisarField;

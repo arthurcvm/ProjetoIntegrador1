@@ -23,28 +23,25 @@ public class ProfessorDAO {
     public ProfessorDAO(){
         this.con = new ConnectionFacotory().getConnection();
     }
-    public void insert(Professor professor) throws SQLException{
-        String insert = "INSERT INTO professor (nome, cpf)";
-                insert += " VALUES(?,?)";
-                
-        PreparedStatement stmt = this.con.prepareStatement(insert);
-        stmt.setString(1, professor.getNome());
-        stmt.setString(2, professor.getCpf());       
+    public void insert(Professor professor){
         try {
+            String insert = "INSERT INTO professor (nome, cpf)";
+                    insert += " VALUES(?,?)";
+
+            PreparedStatement stmt = this.con.prepareStatement(insert);
+            stmt.setString(1, professor.getNome());
+            stmt.setString(2, professor.getCpf());       
+        
             stmt.execute();
             System.out.println("Gravado");
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            stmt.close();
-            this.con.close();
         }
     }
-    public void delete(int id) throws SQLException{
-        String delete = "DELETE FROM professor WHERE ";
-        delete+="id=?";
-        
-       try {
+    public void delete(int id){
+        try {
+            String delete = "DELETE FROM professor WHERE ";
+            delete+="id=?";
             PreparedStatement stmt = this.con.prepareStatement(delete);
             stmt.setInt(1, id);
 
@@ -57,10 +54,10 @@ public class ProfessorDAO {
         }
     }
     
-    public void lista() throws SQLException{
-        String select = "SELECT * FROM professor";
-        PreparedStatement stmt = this.con.prepareStatement(select);
+    public void lista(){
         try {
+            String select = "SELECT * FROM professor";
+            PreparedStatement stmt = this.con.prepareStatement(select);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 String nome = rs.getString("nome");
@@ -70,16 +67,12 @@ public class ProfessorDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
-            stmt.close();
-            this.con.close();
-        }  
+        } 
     }
-    public void buscadado(String dado) throws SQLException{
-        String pesq = "SELECT nome, cpf FROM professor WHERE nome LIKE '%"+dado+"%'";
-        PreparedStatement stmt = this.con.prepareStatement(pesq);
-        
-        try {    
+    public void buscadado(String dado){
+        try {
+            String pesq = "SELECT nome, cpf FROM professor WHERE nome LIKE '%"+dado+"%'";
+            PreparedStatement stmt = this.con.prepareStatement(pesq);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 String nome = rs.getString("nome");
@@ -89,9 +82,6 @@ public class ProfessorDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
-            stmt.close();
-            this.con.close();
-        }           
+        }
     } 
 }
