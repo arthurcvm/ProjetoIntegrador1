@@ -65,14 +65,7 @@ public class ProfessorController {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 int index = faculdadeBox.getSelectionModel().getSelectedIndex(); //Pega o index da seleção pra buscar no array de IDs
-                int id = faculdadeIds.get(index);
-                int faculdadeId;
-                
-                for(Faculdade f: faculdadeList){
-                    if(f.getIdFaculdade() == id){
-                        faculdadeId = f.getIdFaculdade();
-                    }
-                }
+                int faculdadeId = faculdadeIds.get(index);
             }
             
             //Aqui filtra os professores pelo id da faculdade e retorna um arraylist atualizado
