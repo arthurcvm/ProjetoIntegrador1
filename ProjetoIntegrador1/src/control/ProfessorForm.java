@@ -67,7 +67,7 @@ public class ProfessorForm {
     private void cadastrar(){
         this.professor.setNome(nomeField.getText());
         this.professor.setCpf(cpfField.getText());
-        //this.aluno.setSenha(senhaField.getText())
+        this.professor.setSenha(senhaField.getText());
         
         this.dialogStage.close(); //fecha a janela
     }

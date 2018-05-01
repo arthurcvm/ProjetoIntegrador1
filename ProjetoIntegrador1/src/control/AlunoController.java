@@ -11,6 +11,8 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,21 +26,33 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Aluno;
 import model.AlunoGenerico;
+import model.Faculdade;
 
 /**
  *
  * @author arthurcvm
  */
 public class AlunoController {
+    @FXML
     private JFXTextField pesquisarField;
+    @FXML
     private JFXComboBox faculdadeBox;
+    @FXML
     private TableView<AlunoGenerico> alunoTable;
+    @FXML
     private TableColumn<AlunoGenerico, String> nomeColumn;
+    @FXML
     private TableColumn<AlunoGenerico, String> cpfColumn;
+    @FXML
     private TableColumn<AlunoGenerico, String> rgColumn;
     
     private ArrayList<AlunoGenerico> alunoGenericoList = new ArrayList<AlunoGenerico>();
     private ObservableList<AlunoGenerico> genericos;
+    
+    private ArrayList<Faculdade> faculdadeList = new ArrayList();
+    
+    private ArrayList<String> faculdadeNomes = new ArrayList();
+    private ArrayList<Integer> faculdadeIds = new ArrayList();
     
     private BorderPane primaryStage;
     
@@ -51,6 +65,16 @@ public class AlunoController {
         nomeColumn.setCellValueFactory(cellData -> cellData.getValue().getNome());
         cpfColumn.setCellValueFactory(cellData -> cellData.getValue().getCpf());
         rgColumn.setCellValueFactory(cellData -> cellData.getValue().getRg());
+        
+        faculdadeBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                int index = faculdadeBox.getSelectionModel().getSelectedIndex(); //Pega o index da seleção pra buscar no array de IDs
+                int faculdadeId = faculdadeIds.get(index);
+            }
+            
+            //Aqui filtra os alunos pelo id da faculdade e retorna um arraylist atualizado
+        });
     }
 
     public void setPrimaryStage(BorderPane primaryStage) {
@@ -61,6 +85,17 @@ public class AlunoController {
         this.alunoGenericoList = alunoGenericoList;
         this.genericos = FXCollections.observableArrayList(this.alunoGenericoList);
         alunoTable.setItems(genericos); 
+    }
+
+    public void setFaculdadeList(ArrayList<Faculdade> faculdadeList) {
+        this.faculdadeList = faculdadeList;
+        
+        for(Faculdade f: faculdadeList){
+            faculdadeNomes.add(f.getNome());
+            faculdadeIds.add(f.getIdFaculdade());
+        }
+        
+        faculdadeBox.setItems(FXCollections.observableArrayList(faculdadeNomes));
     }
     
     @FXML

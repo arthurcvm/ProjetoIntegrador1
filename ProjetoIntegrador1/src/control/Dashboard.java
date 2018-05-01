@@ -5,6 +5,7 @@
  */
 package control;
 
+import DAO.CursoDAO;
 import DAO.FaculdadeDAO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,9 +70,14 @@ public class Dashboard {
                 professorGenericoList.add(new ProfessorGenerico(p));
             }
             
+            FaculdadeDAO dao = new FaculdadeDAO();
+            ArrayList<Faculdade> faculdadeList = dao.lista();
+            
             this.painel.setRight(pane);
             ProfessorController controller = loader.getController();
             controller.setPrimaryStage(painel);
+            controller.setProfessorGenericoList(professorGenericoList);
+            controller.setFaculdadeList(faculdadeList);
             
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,9 +96,14 @@ public class Dashboard {
                 alunoGenericoList.add(new AlunoGenerico(a));
             }
             
+            FaculdadeDAO dao = new FaculdadeDAO();
+            ArrayList<Faculdade> faculdadeList = dao.lista();
+            
             this.painel.setRight(pane);
             AlunoController controller = loader.getController();
             controller.setPrimaryStage(painel);
+            controller.setAlunoGenericoList(alunoGenericoList);
+            controller.setFaculdadeList(faculdadeList);
             
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,11 +115,8 @@ public class Dashboard {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Curso.fxml"));
             AnchorPane pane = (AnchorPane) loader.load();
             
-            ArrayList<Curso> cursoList = new ArrayList<>(); //Pega do banco
-            ArrayList<CursoGenerico> cursoGenericoList = new ArrayList<>();
-            for(Curso c: cursoList){
-                cursoGenericoList.add(new CursoGenerico(c));
-            }
+            CursoDAO daoCurso = new CursoDAO();
+            ArrayList<CursoGenerico> cursoGenericoList = daoCurso.listaGen();
             
             FaculdadeDAO dao = new FaculdadeDAO();
             ArrayList<Faculdade> faculdadeList = dao.lista();
@@ -136,9 +144,14 @@ public class Dashboard {
                 turmaGenericaList.add(new TurmaGenerica(t));
             }
             
+            FaculdadeDAO dao = new FaculdadeDAO();
+            ArrayList<Faculdade> faculdadeList = dao.lista();
+            
             this.painel.setRight(pane);
             TurmaController controller = loader.getController();
             controller.setPrimaryStage(painel);
+            controller.setTurmaGenericaList(turmaGenericaList);
+            controller.setFaculdadeList(faculdadeList);
             
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,9 +170,14 @@ public class Dashboard {
                 disciplinaGenericaList.add(new DisciplinaGenerica(d));
             }
             
+            FaculdadeDAO dao = new FaculdadeDAO();
+            ArrayList<Faculdade> faculdadeList = dao.lista();
+            
             this.painel.setRight(pane);
             DisciplinaController controller = loader.getController();
             controller.setPrimaryStage(painel);
+            controller.setDisciplinaGenericaList(disciplinaGenericaList);
+            controller.setFaculdadeList(faculdadeList);
             
         } catch (IOException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);

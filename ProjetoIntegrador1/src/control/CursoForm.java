@@ -7,9 +7,12 @@ package control;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import model.Curso;
+import model.Faculdade;
 
 /**
  *
@@ -19,9 +22,14 @@ public class CursoForm {
     @FXML
     private JFXTextField nomeField;
     @FXML
-    private JFXComboBox faculdadeBox;
+    private JFXComboBox<String> faculdadeBox = new JFXComboBox<String>();
     @FXML
     private JFXTextField qtdSemestresField;
+    
+    private ArrayList<Faculdade> faculdadeList = new ArrayList();
+    
+    private ArrayList<String> faculdadeNomes = new ArrayList();
+    private ArrayList<Integer> faculdadeIds = new ArrayList();
     
     private Stage dialogStage;
     private Curso curso;
@@ -47,6 +55,17 @@ public class CursoForm {
             this.qtdSemestresField.setText(String.valueOf(curso.getQtdSemestres()));
         }
     }
+
+    public void setFaculdadeList(ArrayList<Faculdade> faculdadeList) {
+        this.faculdadeList = faculdadeList;
+        
+        for(Faculdade f: faculdadeList){
+            faculdadeNomes.add(f.getNome());
+            faculdadeIds.add(f.getIdFaculdade());
+        }
+        
+        faculdadeBox.setItems(FXCollections.observableArrayList(faculdadeNomes));
+    }
     
     public void setBlock(){
         this.nomeField.setEditable(false);
@@ -66,9 +85,12 @@ public class CursoForm {
     @FXML
     private void cadastrar(){
         this.curso.setNomeCurso(nomeField.getText());
-//        this.curso.setFaculdade(0);
+        
+        int index = faculdadeBox.getSelectionModel().getSelectedIndex(); //Pega o index da seleção pra buscar no array de IDs
+        int idFaculdade = faculdadeIds.get(index);
+        
+        this.curso.setFaculdade(idFaculdade);
         this.curso.setQtdSemestres(Integer.valueOf(qtdSemestresField.getText()));
-        //this.aluno.setSenha(senhaField.getText())
         
         this.dialogStage.close(); //fecha a janela
     }
