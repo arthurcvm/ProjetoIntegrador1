@@ -10,5 +10,4 @@ package model;
  * @author csarp
  */
 public class Professor extends Pessoa{
-    
 }

@@ -25,6 +25,7 @@ public class ProfessorDAO {
     public ProfessorDAO(){
         this.con = new ConnectionFacotory().getConnection();
     }
+  
     public void insert(Professor professor){
         try {
             String insert = "INSERT INTO professor (nome, cpf)";

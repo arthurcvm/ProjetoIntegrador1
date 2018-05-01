@@ -13,6 +13,14 @@ public class Aluno extends Pessoa{
     private String RG;
     private int turma;
 
+    public int getIdAluno() {
+        return IdAluno;
+    }
+
+    public void setIdAluno(int IdAluno) {
+        this.IdAluno = IdAluno;
+    }
+    
     public String getRG() {
         return RG;
     }
