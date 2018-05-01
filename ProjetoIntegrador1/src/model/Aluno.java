@@ -10,15 +10,8 @@ package model;
  * @author csarp
  */
 public class Aluno extends Pessoa{
-    private int IdAluno;
     private String RG;
-    
-    public Aluno(String nome, String cpf, String RG, int IdAluno) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.RG = RG;
-        this.IdAluno = IdAluno;
-    }
+    private int turma;
 
     public int getIdAluno() {
         return IdAluno;
@@ -35,5 +28,15 @@ public class Aluno extends Pessoa{
     public void setRG(String RG) {
         this.RG = RG;
     }
+
+    public int getTurma() {
+        return turma;
+    }
+
+    public void setTurma(int turma) {
+        this.turma = turma;
+    }
+    
+    
     
 }

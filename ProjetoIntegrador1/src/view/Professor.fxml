@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.TableColumn?>
@@ -8,22 +9,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.FaculdadeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.ProfessorController">
    <children>
-      <TableView fx:id="faculdadeTable" layoutX="43.0" layoutY="132.0" prefHeight="200.0" prefWidth="514.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="120.0">
-        <columns>
-          <TableColumn fx:id="faculdadeColumn" prefWidth="75.0" text="FACULDADE" />
-        </columns>
+      <TableView fx:id="professorTable" layoutX="43.0" layoutY="132.0" prefHeight="200.0" prefWidth="514.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="120.0">
+         <columns>
+            <TableColumn fx:id="nomeColumn" prefWidth="75.0" text="NOME" />
+            <TableColumn fx:id="cpfColumn" prefWidth="75.0" text="CPF" />
+         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <JFXTextField fx:id="pesquisarField" labelFloat="true" layoutX="40.0" layoutY="60.0" prefHeight="25.0" prefWidth="302.0" promptText="PESQUISAR" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="60.0">
+      <JFXTextField fx:id="pesquisarForm" labelFloat="true" layoutX="40.0" layoutY="20.0" prefHeight="25.0" prefWidth="302.0" promptText="PESQUISAR" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXButton layoutX="400.0" layoutY="57.0" onAction="#adicionar" prefHeight="30.0" style="-fx-background-color: #3498db;" text="Adicionar faculdade" textFill="WHITE" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="60.0">
+      <JFXButton layoutX="447.0" layoutY="69.0" onAction="#adicionar" prefHeight="30.0" style="-fx-background-color: #3498db;" text="Adicionar professor" textFill="WHITE" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="70.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -47,5 +49,6 @@
             </JFXButton>
          </buttons>
       </ButtonBar>
+      <JFXComboBox fx:id="faculdadeBox" labelFloat="true" layoutX="415.0" layoutY="20.0" prefHeight="30.0" prefWidth="200.0" promptText="FACULDADE" style="-fx-font-size: 14;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0" />
    </children>
 </AnchorPane>

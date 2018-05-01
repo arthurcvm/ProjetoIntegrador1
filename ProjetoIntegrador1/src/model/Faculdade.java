@@ -106,5 +106,4 @@ public class Faculdade {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
 }

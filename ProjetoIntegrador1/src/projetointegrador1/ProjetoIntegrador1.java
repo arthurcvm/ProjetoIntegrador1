@@ -44,11 +44,11 @@ public class ProjetoIntegrador1 extends Application {
         ArrayList<Professor> professorList = new ArrayList<>(); //Pega lista do banco
         ArrayList<Aluno> alunoList = new ArrayList<>(); //Pega lista do banco
         
-        professorList.add(new Professor("José", "12345678910")); //Dado teste
-        alunoList.add(new Aluno("Raimundo", "01987654321")); //Dado teste
+        //professorList.add(new Professor("José", "12345678910")); //Dado teste
+        //alunoList.add(new Aluno("Raimundo", "01987654321")); //Dado teste
         
-//        usuarioA = new Aluno(); //Ativar construtor padrão
-//        usuarioP = new Professor(); //Ativar construtor padrão
+        usuarioA = new Aluno();
+        usuarioP = new Professor();
         
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Login.fxml")); //Carrega o arquivo FXML
