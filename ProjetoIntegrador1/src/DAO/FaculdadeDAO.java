@@ -88,7 +88,7 @@ public class FaculdadeDAO {
     }
     
     public ArrayList<FaculdadeGenerica> listaGen(){
-        ArrayList<Faculdade> faculdadeList = lista();
+        ArrayList<Faculdade> faculdadeList = this.lista();
         ArrayList<FaculdadeGenerica> faculdadeGenericaList = new ArrayList();
         for(Faculdade f: faculdadeList){
                 faculdadeGenericaList.add(new FaculdadeGenerica(f));
