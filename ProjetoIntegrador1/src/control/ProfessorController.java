@@ -5,6 +5,7 @@
  */
 package control;
 
+import DAO.ProfessorDAO;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -96,7 +97,8 @@ public class ProfessorController {
     
     @FXML
     private void adicionar(){
-        //Professor professor = new Professor();
+        Professor professor = new Professor();
+        
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProfessorForm.fxml")); //Carrega o arquivo FXML
             AnchorPane page = (AnchorPane) loader.load();
@@ -108,13 +110,14 @@ public class ProfessorController {
             
             ProfessorForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
-            //controller.setProfessor(professor);
+            controller.setProfessor(professor);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
-            /*if(professor.getNome() != null){
-                //salva no banco
-            }*/
+            if(professor.getNome() != null){
+                ProfessorDAO dao = new ProfessorDAO();
+                dao.insert(professor);
+            }
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -182,5 +185,12 @@ public class ProfessorController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void recarregar() {
+        ProfessorDAO dao = new ProfessorDAO();
+        this.professorGenericoList = dao.listaGen();
+        this.genericos = FXCollections.observableArrayList(this.professorGenericoList);
+        professorTable.setItems(genericos); 
     }
 }

@@ -5,6 +5,7 @@
  */
 package control;
 
+import DAO.CursoDAO;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -109,16 +110,19 @@ public class CursoController {
             CursoForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setCurso(curso);
+            controller.setFaculdadeList(faculdadeList);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
             if(curso.getNomeCurso() != null){
-                //salva no banco
+                CursoDAO dao = new CursoDAO();
+                dao.insert(curso);
             }
         
         } catch (IOException e) {
             e.printStackTrace();
         }
+        recarregar();
     }
     
     @FXML
@@ -179,5 +183,12 @@ public class CursoController {
             e.printStackTrace();
         }
         
+    }
+    
+    public void recarregar() {
+        CursoDAO dao = new CursoDAO();
+        this.cursoGenericoList = dao.listaGen();
+        this.genericos = FXCollections.observableArrayList(this.cursoGenericoList);
+        cursoTable.setItems(genericos); 
     }
 }

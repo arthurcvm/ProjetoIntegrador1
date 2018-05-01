@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Curso;
+import model.CursoGenerico;
 
 /**
  *
@@ -71,6 +72,16 @@ public class CursoDAO {
             Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return array;
+    }
+   
+   public ArrayList<CursoGenerico> listaGen(){
+        ArrayList<Curso> cursoList = lista();
+        ArrayList<CursoGenerico> cursoGenericoList = new ArrayList();
+        for(Curso c: cursoList){
+                cursoGenericoList.add(new CursoGenerico(c));
+            }
+        
+        return cursoGenericoList;
     }
    
     public void edit(Curso curso){

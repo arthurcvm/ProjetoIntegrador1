@@ -91,7 +91,6 @@ public class CursoForm {
         
         this.curso.setFaculdade(idFaculdade);
         this.curso.setQtdSemestres(Integer.valueOf(qtdSemestresField.getText()));
-        //this.aluno.setSenha(senhaField.getText())
         
         this.dialogStage.close(); //fecha a janela
     }

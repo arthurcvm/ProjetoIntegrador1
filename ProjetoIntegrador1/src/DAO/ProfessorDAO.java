@@ -11,8 +11,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.ProfessorGenerico;
 
 /**
  *
@@ -69,6 +71,17 @@ public class ProfessorDAO {
             Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
+    
+    public ArrayList<ProfessorGenerico> listaGen(){
+        ArrayList<Professor> professorList = lista();
+        ArrayList<ProfessorGenerico> professorGenericoList = new ArrayList();
+        for(Professor p: professorList){
+                professorGenericoList.add(new ProfessorGenerico(p));
+            }
+        
+        return professorGenericoList;
+    }
+    
     public void buscadado(String dado){
         try {
             String pesq = "SELECT nome, cpf FROM professor WHERE nome LIKE '%"+dado+"%'";
