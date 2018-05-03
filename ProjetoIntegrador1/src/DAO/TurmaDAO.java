@@ -34,9 +34,7 @@ public class TurmaDAO {
             stmt.setString(1, turma.getDescricao());
             stmt.setInt(2, turma.getSemestre());
             stmt.setInt(3, turma.getCurso());
-        
             stmt.execute();
-            System.out.println("Gravado");
         } catch (SQLException ex) {
             Logger.getLogger(TurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -45,14 +43,13 @@ public class TurmaDAO {
     public void delete(int id){
         try {
             String delete = "DELETE FROM turma WHERE ";
-                   delete+= "id=?";
+                   delete+= "idTURMA=?";
             PreparedStatement stmt = this.con.prepareStatement(delete);
             stmt.setInt(1, id);
 
             stmt.execute();
             stmt.close();
             this.con.close();
-            System.out.println("Deletado");
         } catch (SQLException ex) {
             Logger.getLogger(TurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -92,5 +89,20 @@ public class TurmaDAO {
         } catch (SQLException ex) {
             Logger.getLogger(TurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }          
+    }
+    
+    public void edit(Turma turma){
+        try {
+            String update = "UPDATE turma SET descricao=?, SEMESTRE_idSEMESTRE=?, CURSO_idCURSO=?";
+                update+="WHERE idTURMA=?";
+            PreparedStatement stmt = this.con.prepareStatement(update);
+            stmt.setString(1, turma.getDescricao());
+            stmt.setInt(2, turma.getSemestre());
+            stmt.setInt(3, turma.getCurso());
+            stmt.setInt(4, turma.getIdTurma());
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

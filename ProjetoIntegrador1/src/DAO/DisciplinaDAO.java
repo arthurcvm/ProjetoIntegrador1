@@ -38,7 +38,6 @@ public class DisciplinaDAO {
             stmt.setInt(4, dis.getSemestre());
             stmt.setInt(5, dis.getProfessor());
             stmt.execute();
-//            System.out.println("Gravado");
         } catch (SQLException ex) {
             Logger.getLogger(DisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }    
@@ -54,7 +53,6 @@ public class DisciplinaDAO {
             stmt.execute();
             stmt.close();
             this.con.close();
-//            System.out.println("Deletado");
         } catch (SQLException ex) {
             Logger.getLogger(DisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -98,5 +96,22 @@ public class DisciplinaDAO {
         } catch (SQLException ex) {
             Logger.getLogger(DisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }           
+    }
+    
+    public void edit(Disciplina disc){
+        try {
+            String update = "UPDATE disciplina SET nome=?, abreviacao=?, ch=?, SEMESTRE_idSEMESTRE=?, ";
+                update+="PROFESSOR_idPROFESSOR=? WHERE idDISCIPLINA=?";
+            PreparedStatement stmt = this.con.prepareStatement(update);
+            stmt.setString(1, disc.getNome());
+            stmt.setString(2, disc.getAbreviacao());
+            stmt.setInt(3, disc.getCH());
+            stmt.setInt(4, disc.getSemestre());
+            stmt.setInt(5, disc.getProfessor());
+            stmt.setInt(6, disc.getIdDisciplina());
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

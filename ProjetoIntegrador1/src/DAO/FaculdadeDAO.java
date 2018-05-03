@@ -138,7 +138,6 @@ public class FaculdadeDAO {
             stmt.setString(8, fac.getEstado());
             stmt.setInt(9, fac.getIdFaculdade());
             stmt.execute();
-//            System.out.println("Atuaizado");
         } catch (SQLException ex) {
             Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
