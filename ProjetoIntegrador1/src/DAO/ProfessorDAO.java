@@ -26,7 +26,7 @@ public class ProfessorDAO {
         this.con = new ConnectionFacotory().getConnection();
     }
   
-    public void insert(Professor professor){
+   public void insert(Professor professor){
         try {
             String insert = "INSERT INTO professor (nome, cpf, login, senha, FACULDADE_idFACULDADE)";
                     insert += " VALUES(?,?,?,?,?)";
@@ -37,14 +37,12 @@ public class ProfessorDAO {
             stmt.setString(3, professor.getLogin());
             stmt.setString(4, professor.getSenha());
             stmt.setInt(5, professor.getFaculdade());
-        
             stmt.execute();
-            System.out.println("Gravado");
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+   
     public void delete(int id){
         try {
             String delete = "DELETE FROM professor WHERE ";
@@ -55,7 +53,6 @@ public class ProfessorDAO {
             stmt.execute();
             stmt.close();
             this.con.close();
-            System.out.println("Deletado");
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -83,7 +80,7 @@ public class ProfessorDAO {
         return array;
     }
     
-    public ArrayList<ProfessorGenerico> listaGen(){
+     public ArrayList<ProfessorGenerico> listaGen(){
         ArrayList<Professor> professorList =  this.lista();
         ArrayList<ProfessorGenerico> professorGenericoList = new ArrayList();
         for(Professor p: professorList){

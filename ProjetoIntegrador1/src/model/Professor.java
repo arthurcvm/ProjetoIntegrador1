@@ -19,4 +19,10 @@ public class Professor extends Pessoa{
     public void setFaculdade(int faculdade) {
         this.faculdade = faculdade;
     }
+    
+    //olhar se da erro quando usar
+    public void setLogin(){
+        this.login = this.getCpf();
+    }
+    
 }
