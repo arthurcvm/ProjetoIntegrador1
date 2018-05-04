@@ -57,7 +57,7 @@ public class CursoDAO {
    public ArrayList<Curso> lista(){
         ArrayList<Curso> array = new ArrayList();
         try {
-            String select = "SELECT * FROM faculdade";
+            String select = "SELECT * FROM curso";
             PreparedStatement stmt = this.con.prepareStatement(select);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
@@ -80,13 +80,12 @@ public class CursoDAO {
         for(Curso c: cursoList){
                 cursoGenericoList.add(new CursoGenerico(c));
             }
-        
         return cursoGenericoList;
     }
    
     public void edit(Curso curso){
         try {
-            String update = "UPDATE curso SET nomeCurso=?, qtdSemestres=?, FACULDADE_idFACULDADE=?";
+            String update = "UPDATE curso SET nomeCurso=?, qtdSemestres=?, FACULDADE_idFACULDADE=? ";
                 update+="WHERE idCURSO=?";
             PreparedStatement stmt = this.con.prepareStatement(update);
             stmt.setString(1, curso.getNomeCurso());

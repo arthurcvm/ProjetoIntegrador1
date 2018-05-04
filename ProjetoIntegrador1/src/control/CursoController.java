@@ -90,8 +90,7 @@ public class CursoController {
         for(Faculdade f: faculdadeList){
             faculdadeNomes.add(f.getNome());
             faculdadeIds.add(f.getIdFaculdade());
-        }
-        
+        }      
         faculdadeBox.setItems(FXCollections.observableArrayList(faculdadeNomes));
     }
     
@@ -118,6 +117,7 @@ public class CursoController {
                 CursoDAO dao = new CursoDAO();
                 dao.insert(curso);
             }
+            recarregar();
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -128,7 +128,9 @@ public class CursoController {
     @FXML
     private void excluir(){
         Curso curso = cursoTable.getSelectionModel().getSelectedItem().getCurso();
-        //Exclui no banco
+        CursoDAO dao = new CursoDAO();
+        dao.delete(curso.getIdCurso());
+        recarregar();
     }
     
     @FXML
@@ -147,11 +149,14 @@ public class CursoController {
             CursoForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setCurso(curso);
+            controller.setFaculdadeList(faculdadeList);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
             if(curso.getNomeCurso() != null){
-                //salva no banco
+                CursoDAO dao = new CursoDAO();
+                dao.edit(curso);
+                recarregar();
             }
         
         } catch (IOException e) {
