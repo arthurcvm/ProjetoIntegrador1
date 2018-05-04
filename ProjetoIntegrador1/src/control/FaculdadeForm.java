@@ -69,6 +69,20 @@ public class FaculdadeForm {
             this.numeroField.setText(String.valueOf(faculdade.getNumero()));
             //this.ufBox.setValue(faculdade.getEstado());
             //this.convenioBox.setValue(faculdade.getConvenio());
+            
+            for(int i = 0; i < estados.length; i++){
+                if(estados[i].equals(faculdade.getEstado())){
+                    ufBox.setValue(estados[i]);
+                }                
+            }
+            if(faculdade.getConvenio() != null){
+                if(faculdade.getConvenio().equals(convenioList[0])){
+                    convenioBox.setValue(convenioList[0]);
+                }
+                else{
+                    convenioBox.setValue(convenioList[1]);
+                }
+            }
         }
     }
     
