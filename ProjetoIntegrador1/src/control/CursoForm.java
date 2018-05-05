@@ -51,7 +51,6 @@ public class CursoForm {
         this.curso = curso;
         if(curso.getNomeCurso() != null){
             this.nomeField.setText(curso.getNomeCurso());
-            //this.faculdadeBox.setValue();
             this.qtdSemestresField.setText(String.valueOf(curso.getQtdSemestres()));
         }
     }
@@ -65,6 +64,14 @@ public class CursoForm {
         }
         
         faculdadeBox.setItems(FXCollections.observableArrayList(faculdadeNomes));
+        
+        if(curso.getNomeCurso() != null){
+            for(int i=0; i < faculdadeList.size(); i++){
+                if(faculdadeList.get(i).getIdFaculdade() == curso.getFaculdade()){
+                    faculdadeBox.setValue(faculdadeNomes.get(i));
+                }
+            }
+        }
     }
     
     public void setBlock(){

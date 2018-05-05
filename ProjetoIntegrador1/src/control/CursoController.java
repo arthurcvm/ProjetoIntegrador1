@@ -180,6 +180,7 @@ public class CursoController {
             CursoForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setCurso(curso);
+            controller.setFaculdadeList(faculdadeList);
             controller.setBlock();
             
             stage.showAndWait(); //Exibe janela e pausa esta thread

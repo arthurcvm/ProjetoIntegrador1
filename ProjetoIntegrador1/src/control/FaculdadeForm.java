@@ -67,8 +67,6 @@ public class FaculdadeForm {
             this.cidadeField.setText(faculdade.getCidade());
             this.bairroField.setText(faculdade.getBairro());
             this.numeroField.setText(String.valueOf(faculdade.getNumero()));
-            //this.ufBox.setValue(faculdade.getEstado());
-            //this.convenioBox.setValue(faculdade.getConvenio());
             
             for(int i = 0; i < estados.length; i++){
                 if(estados[i].equals(faculdade.getEstado())){
