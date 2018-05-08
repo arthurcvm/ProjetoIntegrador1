@@ -111,6 +111,7 @@ public class ProfessorController {
             ProfessorForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setProfessor(professor);
+            controller.setFaculdadeList(faculdadeList);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
@@ -118,6 +119,8 @@ public class ProfessorController {
                 ProfessorDAO dao = new ProfessorDAO();
                 dao.insert(professor);
             }
+            
+            recarregar();
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -146,12 +149,16 @@ public class ProfessorController {
             ProfessorForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setProfessor(professor);
+            controller.setFaculdadeList(faculdadeList);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
             if(professor.getNome() != null){
-                //salva no banco
+                ProfessorDAO dao = new ProfessorDAO();
+                dao.edit(professor);
             }
+            
+            recarregar();
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -174,13 +181,10 @@ public class ProfessorController {
             ProfessorForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setProfessor(professor);
+            controller.setFaculdadeList(faculdadeList);
             controller.setBlock();
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
-            
-            if(professor.getNome() != null){
-                //salva no banco
-            }
         
         } catch (IOException e) {
             e.printStackTrace();
