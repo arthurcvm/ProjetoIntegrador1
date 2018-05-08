@@ -103,7 +103,7 @@ public class TurmaDAO {
     
     public void edit(Turma turma){
         try {
-            String update = "UPDATE turma SET descricao=?, SEMESTRE_idSEMESTRE=?, CURSO_idCURSO=?";
+            String update = "UPDATE turma SET descricao=?, SEMESTRE_idSEMESTRE=?, CURSO_idCURSO=? ";
                 update+="WHERE idTURMA=?";
             PreparedStatement stmt = this.con.prepareStatement(update);
             stmt.setString(1, turma.getDescricao());

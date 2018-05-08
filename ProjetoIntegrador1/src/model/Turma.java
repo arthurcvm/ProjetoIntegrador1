@@ -19,19 +19,6 @@ public class Turma {
         
     }
 
-//    public Turma(String descricao, int semestre, int curso){
-//        this.descricao = descricao;
-//        this.semestre = semestre;
-//        this.curso = curso;
-//    }
-//        
-//    public Turma(int idTurma, String descricao, int semestre, int curso){
-//        this.idTurma = idTurma;
-//        this.descricao = descricao;
-//        this.semestre = semestre;
-//        this.curso = curso;
-//    }
-
     public int getIdTurma() {
         return idTurma;
     }
