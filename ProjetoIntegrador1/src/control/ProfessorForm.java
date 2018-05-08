@@ -5,10 +5,14 @@
  */
 package control;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import model.Faculdade;
 import model.Professor;
 
 /**
@@ -22,6 +26,12 @@ public class ProfessorForm {
     private JFXTextField cpfField;
     @FXML
     private JFXPasswordField senhaField;
+    @FXML
+    private JFXComboBox<String> faculdadeBox = new JFXComboBox<String>();
+    
+    private ArrayList<Faculdade> faculdadeList = new ArrayList();
+    
+    private ArrayList<String> faculdadeNomes = new ArrayList();
     
     private Stage dialogStage;
     private Professor professor;
@@ -31,8 +41,8 @@ public class ProfessorForm {
      * após o arquivo fxml ter sido carregado.
      */
     @FXML
-    public void initialize() {        
-        // Carregando lista de estados na Box.
+    public void initialize() {
+        
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -44,7 +54,25 @@ public class ProfessorForm {
         if(professor.getNome() != null){
             this.nomeField.setText(professor.getNome());
             this.cpfField.setText(professor.getCpf());
-            //this.senhaField.setText("");
+            this.senhaField.setText(professor.getSenha());
+        }
+    }
+
+    public void setFaculdadeList(ArrayList<Faculdade> faculdadeList) {
+        this.faculdadeList = faculdadeList;
+        
+        for(Faculdade f: faculdadeList){
+            faculdadeNomes.add(f.getNome());
+        }
+        
+        faculdadeBox.setItems(FXCollections.observableArrayList(faculdadeNomes));
+        
+        if(professor.getNome() != null){
+            for(int i=0; i < faculdadeList.size(); i++){
+                if(faculdadeList.get(i).getIdFaculdade() == professor.getFaculdade()){
+                    faculdadeBox.setValue(faculdadeNomes.get(i));
+                }
+            }
         }
     }
     
@@ -58,7 +86,7 @@ public class ProfessorForm {
     
     @FXML
     private void cancelar(){
-        //curso.setNome(null);
+        professor.setNome(null);
         
         this.dialogStage.close(); //fecha a janela
     }
@@ -69,6 +97,7 @@ public class ProfessorForm {
         this.professor.setCpf(cpfField.getText());
         this.professor.setLogin(cpfField.getText());
         this.professor.setSenha(senhaField.getText());
+        this.professor.setFaculdade(faculdadeList.get(faculdadeBox.getSelectionModel().getSelectedIndex()).getIdFaculdade());
         
         this.dialogStage.close(); //fecha a janela
     }

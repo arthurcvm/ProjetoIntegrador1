@@ -5,6 +5,7 @@
  */
 package model;
 
+import DAO.CursoDAO;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -22,7 +23,7 @@ public class TurmaGenerica {
         this.turma = turma;
         this.descricao = new SimpleStringProperty(turma.getDescricao());
         this.semestre = new SimpleIntegerProperty(turma.getSemestre());
-        //this.curso = ; //Puxa do banco
+        this.curso = new SimpleStringProperty(new CursoDAO().get(turma.getCurso()).getNomeCurso());
     }
 
     public SimpleStringProperty getDescricao() {

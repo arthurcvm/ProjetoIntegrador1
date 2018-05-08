@@ -5,6 +5,7 @@
  */
 package control;
 
+import DAO.CursoDAO;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.util.ArrayList;
@@ -70,14 +71,30 @@ public class TurmaForm {
         }
         
         cursoBox.setItems(FXCollections.observableArrayList(cursoNomes));
+        
+        if(turma.getDescricao() != null){
+            int cursoId = turma.getCurso();
+            
+            int qtdSemestres = new CursoDAO().get(cursoId).getQtdSemestres();
+            
+            for(int i = 0; i < cursoList.size(); i++){
+                if(cursoList.get(i).getIdCurso() == cursoId){
+                    this.cursoBox.setValue(cursoNomes.get(i));                    
+                }
+            }
+            semestreList.clear();
+            for(int i = 1; i <= qtdSemestres; i++){
+                    semestreList.add(i);
+            }
+            semestreBox.setItems(FXCollections.observableArrayList(semestreList));
+            this.semestreBox.setValue(turma.getSemestre());
+        }
     }
 
     public void setTurma(Turma turma) {
         this.turma = turma;
         if(turma.getDescricao() != null){
             this.descricaoField.setText(turma.getDescricao());
-            //this.cursoField.setText(turma.getCurso());
-            //this.semestreField.setText(turma.getSemestre());
         }
     }
     

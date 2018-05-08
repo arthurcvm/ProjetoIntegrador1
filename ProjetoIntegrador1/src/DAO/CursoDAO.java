@@ -83,6 +83,16 @@ public class CursoDAO {
         return cursoGenericoList;
     }
    
+   public Curso get(int id){
+       ArrayList<Curso> cursoList = lista();
+       for(Curso c: cursoList){
+           if(c.getIdCurso() == id){
+               return c;
+           }
+       }
+       return null;
+   }
+   
     public void edit(Curso curso){
         try {
             String update = "UPDATE curso SET nomeCurso=?, qtdSemestres=?, FACULDADE_idFACULDADE=? ";

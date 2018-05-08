@@ -7,6 +7,8 @@ package control;
 
 import DAO.CursoDAO;
 import DAO.FaculdadeDAO;
+import DAO.ProfessorDAO;
+import DAO.TurmaDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -64,11 +66,7 @@ public class Dashboard {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Professor.fxml"));
             AnchorPane pane = (AnchorPane) loader.load();
             
-            ArrayList<Professor> professorList = new ArrayList<>(); //Pega do banco
-            ArrayList<ProfessorGenerico> professorGenericoList = new ArrayList<>();
-            for(Professor p: professorList){
-                professorGenericoList.add(new ProfessorGenerico(p));
-            }
+            ArrayList<ProfessorGenerico> professorGenericoList = new ProfessorDAO().listaGen();
             
             FaculdadeDAO dao = new FaculdadeDAO();
             ArrayList<Faculdade> faculdadeList = dao.lista();
@@ -138,11 +136,7 @@ public class Dashboard {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Turma.fxml"));
             AnchorPane pane = (AnchorPane) loader.load();
             
-            ArrayList<Turma> turmaList = new ArrayList<>(); //Pega do banco
-            ArrayList<TurmaGenerica> turmaGenericaList = new ArrayList<>();
-            for(Turma t: turmaList){
-                turmaGenericaList.add(new TurmaGenerica(t));
-            }
+            ArrayList<TurmaGenerica> turmaGenericaList = new TurmaDAO().listaGen();
             
             FaculdadeDAO dao = new FaculdadeDAO();
             ArrayList<Faculdade> faculdadeList = dao.lista();
