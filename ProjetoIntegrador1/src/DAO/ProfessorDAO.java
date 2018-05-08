@@ -89,22 +89,6 @@ public class ProfessorDAO {
         return professorGenericoList;
     }
     
-    public void buscadado(String dado){
-        try {
-            String pesq = "SELECT nome, cpf FROM professor WHERE nome LIKE '%"+dado+"%'";
-            PreparedStatement stmt = this.con.prepareStatement(pesq);
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                String nome = rs.getString("nome");
-                String cpf = rs.getString("cpf");
-                
-                System.out.println("| Nome: " + nome +" | CPF: " + cpf + " | ");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     public void edit(Professor prof){
         try {
             String update = "UPDATE professor SET nome=?, cpf=?, login=?, senha=?, ";
@@ -115,9 +99,58 @@ public class ProfessorDAO {
             stmt.setString(3, prof.getLogin());
             stmt.setString(4, prof.getSenha());
             stmt.setInt(5, prof.getFaculdade());
+            stmt.setInt(6, prof.getId());
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public ArrayList<Professor> search(String dado){
+        ArrayList<Professor> array = new ArrayList();
+        try {
+            String pesq = "SELECT * FROM "
+                    + "professor WHERE nome LIKE '%?%'";
+            PreparedStatement stmt = this.con.prepareStatement(pesq);
+            stmt.setString(1, dado);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Professor professor = new Professor();
+                professor.setId(rs.getInt("idPROFESSOR"));
+                professor.setNome(rs.getString("nome"));
+                professor.setCpf(rs.getString("cpf"));
+                professor.setLogin(rs.getString("login"));
+                professor.setSenha(rs.getString("senha"));
+                professor.setFaculdade(rs.getInt("FACULDADE_idFACULDADE"));
+                array.add(professor);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }         
+        return array;
+    }
+    
+    public ArrayList<Professor> filtro(int id_faculdade){
+        ArrayList<Professor> array = new ArrayList();
+        try {
+            String pesq = "SELECT * FROM "
+                    + "professor WHERE FACULDADE_idFACULDADE = ?";
+            PreparedStatement stmt = this.con.prepareStatement(pesq);
+            stmt.setInt(1, id_faculdade);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Professor professor = new Professor();
+                professor.setId(rs.getInt("idPROFESSOR"));
+                professor.setNome(rs.getString("nome"));
+                professor.setCpf(rs.getString("cpf"));
+                professor.setLogin(rs.getString("login"));
+                professor.setSenha(rs.getString("senha"));
+                professor.setFaculdade(rs.getInt("FACULDADE_idFACULDADE"));
+                array.add(professor);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }         
+        return array;
     }
 }

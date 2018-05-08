@@ -85,22 +85,6 @@ public class TurmaDAO {
         return turmaGenericaList;
     }
     
-    public void buscadado(String dado){
-        try {
-            String pesq = "SELECT nome, abreviacao, CH, semestre, professor FROM disciplina WHERE nome LIKE '%"+dado+"%'";
-            PreparedStatement stmt = this.con.prepareStatement(pesq);
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                String descricao = rs.getString("descricao");
-                String semestre = rs.getString("semestre");
-                int curso = rs.getInt("curso");
-                System.out.println("Nome: " + descricao +" | Abreviação: " + semestre + " | CH: " + curso);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }          
-    }
-    
     public void edit(Turma turma){
         try {
             String update = "UPDATE turma SET descricao=?, SEMESTRE_idSEMESTRE=?, CURSO_idCURSO=? ";
@@ -114,5 +98,49 @@ public class TurmaDAO {
         } catch (SQLException ex) {
             Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public ArrayList<Turma> search(String dado){
+        ArrayList<Turma> array = new ArrayList();
+        try {
+            String pesq = "SELECT * FROM "
+                    + "turma WHERE descricao LIKE '%?%'";
+            PreparedStatement stmt = this.con.prepareStatement(pesq);
+            stmt.setString(1, dado);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Turma turma= new Turma();
+                turma.setIdTurma(rs.getInt("idTURMA"));
+                turma.setDescricao(rs.getString("descricao"));
+                turma.setSemestre(rs.getInt("SEMESTRE_idSEMESTRE"));
+                turma.setCurso(rs.getInt("CURSO_idCURSO"));
+                array.add(turma);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }         
+        return array;
+    }
+    
+    public ArrayList<Turma> filtro(int id_curso){
+        ArrayList<Turma> array = new ArrayList();
+        try {
+            String pesq = "SELECT * FROM "
+                    + "turma WHERE CURSO_idCURSO = ?";
+            PreparedStatement stmt = this.con.prepareStatement(pesq);
+            stmt.setInt(1, id_curso);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Turma turma = new Turma();
+                turma.setIdTurma(rs.getInt("idTURMA"));
+                turma.setDescricao(rs.getString("descricao"));
+                turma.setSemestre(rs.getInt("SEMESTRE_idSEMESTRE"));
+                turma.setCurso(rs.getInt("CURSO_idCURSO"));
+                array.add(turma);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }         
+        return array;
     }
 }
