@@ -5,6 +5,8 @@
  */
 package control;
 
+import DAO.CursoDAO;
+import DAO.TurmaDAO;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -22,6 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Curso;
 import model.Faculdade;
 import model.Turma;
 import model.TurmaGenerica;
@@ -41,8 +44,6 @@ public class TurmaController {
     private TableColumn<TurmaGenerica, String> descricaoColumn;
     @FXML
     private TableColumn<TurmaGenerica, String> cursoColumn;
-    @FXML
-    private TableColumn<TurmaGenerica, Integer> chColumn;
     @FXML
     private TableColumn<TurmaGenerica, Integer> semestreColumn;
     
@@ -64,7 +65,6 @@ public class TurmaController {
     public void initialize() {
         descricaoColumn.setCellValueFactory(cellData -> cellData.getValue().getDescricao());
         cursoColumn.setCellValueFactory(cellData -> cellData.getValue().getCurso());
-        //chColumn.setCellValueFactory(cellData -> cellData.getValue().getCh());
         semestreColumn.setCellValueFactory(cellData -> cellData.getValue().getSemestre().asObject());
         
         faculdadeBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
@@ -102,6 +102,7 @@ public class TurmaController {
     @FXML
     private void adicionar(){
         Turma turma = new Turma();
+        ArrayList<Curso> cursoList = new CursoDAO().lista();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TurmaForm.fxml")); //Carrega o arquivo FXML
             AnchorPane page = (AnchorPane) loader.load();
@@ -114,12 +115,17 @@ public class TurmaController {
             TurmaForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setTurma(turma);
+            controller.setCursoList(cursoList);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
             if(turma.getDescricao() != null){
-                //salva no banco
+                TurmaDAO dao = new TurmaDAO();
+                
+                dao.insert(turma);
             }
+            
+            recarregar();
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -129,12 +135,15 @@ public class TurmaController {
     @FXML
     private void excluir(){
         Turma turma = turmaTable.getSelectionModel().getSelectedItem().getTurma();
-        //Exclui no banco
+        TurmaDAO dao = new TurmaDAO();
+        dao.delete(turma.getIdTurma());
+        recarregar();
     }
     
     @FXML
     private void editar(){
         Turma turma = turmaTable.getSelectionModel().getSelectedItem().getTurma();
+        ArrayList<Curso> cursoList = new CursoDAO().lista();
         
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TurmaForm.fxml")); //Carrega o arquivo FXML
@@ -148,12 +157,17 @@ public class TurmaController {
             TurmaForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setTurma(turma);
+            controller.setCursoList(cursoList);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
             if(turma.getDescricao() != null){
-                //salva no banco
+                TurmaDAO dao = new TurmaDAO();
+                
+                dao.edit(turma);
             }
+            
+            recarregar();
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -163,6 +177,7 @@ public class TurmaController {
     @FXML
     private void detalhes(){
         Turma turma = turmaTable.getSelectionModel().getSelectedItem().getTurma();
+        ArrayList<Curso> cursoList = new CursoDAO().lista();
         
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/TurmaForm.fxml")); //Carrega o arquivo FXML
@@ -176,6 +191,7 @@ public class TurmaController {
             TurmaForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setTurma(turma);
+            controller.setCursoList(cursoList);
             controller.setBlock();
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
@@ -183,5 +199,12 @@ public class TurmaController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void recarregar() {
+        TurmaDAO dao = new TurmaDAO();
+        this.turmaGenericaList = dao.listaGen();
+        this.genericas = FXCollections.observableArrayList(this.turmaGenericaList);
+        turmaTable.setItems(genericas); 
     }
 }

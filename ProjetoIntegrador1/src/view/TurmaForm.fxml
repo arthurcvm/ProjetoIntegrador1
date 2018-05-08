@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,16 +14,8 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="cursoField" labelFloat="true" layoutX="91.0" layoutY="191.0" prefHeight="30.0" prefWidth="200.0" promptText="CURSO">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="semestreField" labelFloat="true" layoutX="91.0" layoutY="246.0" prefHeight="30.0" prefWidth="200.0" promptText="SEMESTRE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXTextField>
+      <JFXComboBox fx:id="cursoBox" labelFloat="true" layoutX="91.0" layoutY="191.0" prefHeight="30.0" prefWidth="200.0" promptText="CURSO" style="-fx-font-size: 14;" />
+      <JFXComboBox fx:id="semestreBox" labelFloat="true" layoutX="91.0" layoutY="246.0" prefWidth="90.0" promptText="SEMESTRE" style="-fx-font-size: 14;" />
       <ButtonBar layoutX="179.0" layoutY="434.0" prefHeight="40.0" prefWidth="226.0">
          <buttons>
             <JFXButton onAction="#cancelar" style="-fx-background-color: #e74c3c;" text="CANCELAR" textFill="WHITE">

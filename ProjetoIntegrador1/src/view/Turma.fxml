@@ -15,7 +15,6 @@
         <columns>
           <TableColumn fx:id="descricaoColumn" prefWidth="75.0" text="DESCRIÇÃO" />
           <TableColumn fx:id="cursoColumn" prefWidth="75.0" text="CURSO" />
-            <TableColumn fx:id="chColumn" prefWidth="75.0" text="CH" />
             <TableColumn fx:id="semestreColumn" prefWidth="75.0" text="SEMESTRE" />
         </columns>
          <columnResizePolicy>

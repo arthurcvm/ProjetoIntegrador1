@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Turma;
+import model.TurmaGenerica;
 
 /**
  *
@@ -73,6 +74,15 @@ public class TurmaDAO {
             Logger.getLogger(TurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return turma;
+    }
+    
+    public ArrayList<TurmaGenerica> listaGen(){
+        ArrayList<Turma> turmaList = lista();
+        ArrayList<TurmaGenerica> turmaGenericaList = new ArrayList();
+        for(Turma t: turmaList){
+                turmaGenericaList.add(new TurmaGenerica(t));
+            }
+        return turmaGenericaList;
     }
     
     public void buscadado(String dado){
