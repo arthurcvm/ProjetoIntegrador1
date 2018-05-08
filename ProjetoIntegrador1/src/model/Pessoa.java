@@ -13,8 +13,8 @@ public class Pessoa {
     protected int id;
     protected String nome;
     protected String cpf;
-    protected String login = "teste";
-    protected String senha;
+    protected String login="teste";
+    protected String senha="teste";
 
     public int getId() {
         return id;

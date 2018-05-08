@@ -10,7 +10,7 @@ package model;
  * @author csarp
  */
 public class Professor extends Pessoa{
-    private int faculdade;
+    private int faculdade = 1;
 
     public int getFaculdade() {
         return faculdade;

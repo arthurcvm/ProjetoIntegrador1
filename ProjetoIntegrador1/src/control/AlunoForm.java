@@ -71,7 +71,7 @@ public class AlunoForm {
         this.aluno.setNome(nomeField.getText());
         this.aluno.setCpf(cpfField.getText());
         this.aluno.setRG(rgField.getText());
-        //this.aluno.setSenha(senhaField.getText())
+        this.aluno.setSenha(senhaField.getText());
         
         this.dialogStage.close(); //fecha a janela
     }

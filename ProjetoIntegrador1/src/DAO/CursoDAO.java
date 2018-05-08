@@ -36,7 +36,7 @@ public class CursoDAO {
             stmt.setInt(3, curso.getFaculdade());
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -50,7 +50,7 @@ public class CursoDAO {
             stmt.close();
             this.con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -69,7 +69,7 @@ public class CursoDAO {
                 array.add(curso);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return array;
     }
@@ -94,7 +94,51 @@ public class CursoDAO {
             stmt.setInt(4, curso.getIdCurso());
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public ArrayList<Curso> search(String dado){
+        ArrayList<Curso> array = new ArrayList();
+        try {
+            String pesq = "SELECT * FROM "
+                    + "curso WHERE nomeCurso LIKE '%?%'";
+            PreparedStatement stmt = this.con.prepareStatement(pesq);
+            stmt.setString(1, dado);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Curso curso= new Curso();
+                curso.setIdCurso(rs.getInt("idCURSO"));
+                curso.setNomeCurso(rs.getString("nomeCurso"));
+                curso.setQtdSemestres(rs.getInt("qtdSemestres"));
+                curso.setFaculdade(rs.getInt("FACULDADE_idFACULDADE"));
+                array.add(curso);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }         
+        return array;
+    }
+    
+    public ArrayList<Curso> filtro(int id){
+        ArrayList<Curso> array = new ArrayList();
+        try {
+            String pesq = "SELECT * FROM "
+                    + "curso WHERE FACULDADE_idFACULDADE = ?";
+            PreparedStatement stmt = this.con.prepareStatement(pesq);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Curso curso= new Curso();
+                curso.setIdCurso(rs.getInt("idCURSO"));
+                curso.setNomeCurso(rs.getString("nomeCurso"));
+                curso.setQtdSemestres(rs.getInt("qtdSemestres"));
+                curso.setFaculdade(rs.getInt("FACULDADE_idFACULDADE"));
+                array.add(curso);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CursoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }         
+        return array;
     }
 }
