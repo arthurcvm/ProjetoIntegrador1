@@ -7,6 +7,7 @@ package control;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 import model.Disciplina;
 
@@ -25,6 +26,8 @@ public class DisciplinaForm {
     private JFXTextField semestreField;
     @FXML
     private JFXTextField professorField;
+    @FXML
+    private ButtonBar botoes;
     
     private Disciplina disciplina;
     private Stage dialogStage;
@@ -59,6 +62,7 @@ public class DisciplinaForm {
         this.abreviacaoField.setEditable(false);
         this.professorField.setEditable(false);
         this.semestreField.setEditable(false);
+        botoes.setVisible(false);
         
         disciplina.setNome(null);
     }

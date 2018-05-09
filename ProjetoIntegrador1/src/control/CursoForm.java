@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXTextField;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 import model.Curso;
 import model.Faculdade;
@@ -25,6 +26,8 @@ public class CursoForm {
     private JFXComboBox<String> faculdadeBox = new JFXComboBox<String>();
     @FXML
     private JFXTextField qtdSemestresField;
+    @FXML
+    private ButtonBar botoes;
     
     private ArrayList<Faculdade> faculdadeList = new ArrayList();
     
@@ -78,6 +81,7 @@ public class CursoForm {
         this.nomeField.setEditable(false);
         this.qtdSemestresField.setEditable(false);
         this.faculdadeBox.setEditable(false);
+        botoes.setVisible(false);
         
         curso.setNomeCurso(null);
     }

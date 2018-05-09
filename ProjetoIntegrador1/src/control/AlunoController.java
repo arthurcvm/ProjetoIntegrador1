@@ -162,7 +162,7 @@ public class AlunoController {
             
             if(aluno.getNome() != null){
                 AlunoDAO dao = new AlunoDAO();
-                //dao.edit(aluno);
+                dao.edit(aluno);
             }
             
             recarregar();
