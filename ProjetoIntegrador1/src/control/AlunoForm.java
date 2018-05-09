@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXTextField;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 import model.Aluno;
 import model.Turma;
@@ -30,6 +31,8 @@ public class AlunoForm {
     private JFXPasswordField senhaField;
     @FXML
     private JFXComboBox turmaBox;
+    @FXML
+    private ButtonBar botoes;
     
     private Stage dialogStage;
     private Aluno aluno;
@@ -83,6 +86,7 @@ public class AlunoForm {
         this.cpfField.setEditable(false);
         this.rgField.setEditable(false);
         this.senhaField.setEditable(false);
+        botoes.setVisible(false);
         aluno.setNome(null);
     }
     

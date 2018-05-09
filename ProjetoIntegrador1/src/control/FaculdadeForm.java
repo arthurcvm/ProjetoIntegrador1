@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 import model.Faculdade;
 
@@ -33,6 +34,8 @@ public class FaculdadeForm {
     private JFXComboBox<String> ufBox = new JFXComboBox<String>();
     @FXML
     private JFXComboBox<String> convenioBox = new JFXComboBox<String>();
+    @FXML
+    private ButtonBar botoes;
     
     private Stage dialogStage;
     private Faculdade faculdade;
@@ -85,7 +88,7 @@ public class FaculdadeForm {
     }
     
     public void setBlock(){
-        this.nomeField.setText(faculdade.getNome());
+        this.nomeField.setEditable(false);
         this.cnpjField.setEditable(false);
         this.logradouroField.setEditable(false);
         this.cidadeField.setEditable(false);
@@ -93,6 +96,7 @@ public class FaculdadeForm {
         this.numeroField.setEditable(false);
         this.ufBox.setEditable(false);
         this.convenioBox.setEditable(false);
+        botoes.setVisible(false);
         
         faculdade.setNome(null);
     }

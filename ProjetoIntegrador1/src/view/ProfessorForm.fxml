@@ -31,7 +31,7 @@
             <JFXComboBox fx:id="faculdadeBox" labelFloat="true" prefHeight="30.0" prefWidth="250.0" promptText="FACULDADE" style="-fx-font-size: 14;" />
          </children>
       </VBox>
-      <ButtonBar layoutX="179.0" layoutY="434.0" prefHeight="40.0" prefWidth="226.0">
+      <ButtonBar fx:id="botoes" layoutX="179.0" layoutY="434.0" prefHeight="40.0" prefWidth="226.0">
          <buttons>
             <JFXButton onAction="#cancelar" style="-fx-background-color: #e74c3c;" text="CANCELAR" textFill="WHITE">
                <font>

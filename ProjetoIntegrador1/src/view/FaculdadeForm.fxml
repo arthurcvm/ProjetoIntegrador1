@@ -50,7 +50,7 @@
          </children>
       </HBox>
       <JFXComboBox fx:id="convenioBox" labelFloat="true" layoutX="94.0" layoutY="376.0" prefHeight="30.0" prefWidth="344.0" promptText="CONVÊNIO" style="-fx-font-size: 14;" />
-      <ButtonBar layoutX="179.0" layoutY="434.0" prefHeight="40.0" prefWidth="226.0">
+      <ButtonBar fx:id="botoes" layoutX="179.0" layoutY="434.0" prefHeight="40.0" prefWidth="226.0">
         <buttons>
             <JFXButton onAction="#cancelar" style="-fx-background-color: #e74c3c;" text="CANCELAR" textFill="WHITE">
                <font>

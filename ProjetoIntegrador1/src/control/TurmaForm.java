@@ -13,6 +13,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 import model.Curso;
 import model.Turma;
@@ -28,6 +29,8 @@ public class TurmaForm {
     private JFXComboBox cursoBox;
     @FXML
     private JFXComboBox semestreBox;
+    @FXML
+    private ButtonBar botoes;
     
     private Stage dialogStage;
     private Turma turma;
@@ -102,6 +105,7 @@ public class TurmaForm {
         this.descricaoField.setEditable(false);
         this.cursoBox.setEditable(false);
         this.semestreBox.setEditable(false);
+        botoes.setVisible(false);
         
         turma.setDescricao(null);
     }

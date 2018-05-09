@@ -143,4 +143,13 @@ public class TurmaDAO {
         }         
         return array;
     }
+    
+    public ArrayList<TurmaGenerica> filtroGen(int id_curso){
+        ArrayList<Turma> turmaList = filtro(id_curso);
+        ArrayList<TurmaGenerica> turmaGenericaList = new ArrayList();
+        for(Turma t: turmaList){
+                turmaGenericaList.add(new TurmaGenerica(t));
+            }
+        return turmaGenericaList;                
+    }
 }

@@ -75,11 +75,11 @@ public class TurmaController {
         semestreColumn.setCellValueFactory(cellData -> cellData.getValue().getSemestre().asObject());
         
         faculdadeBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-            
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 int index = faculdadeBox.getSelectionModel().getSelectedIndex(); //Pega o index da seleção pra buscar no array de IDs
                 
+                recarregar();
                 int faculdadeId = faculdadeIds.get(index);
                 cursoList = new CursoDAO().filtro(faculdadeId);
                 
@@ -89,6 +89,19 @@ public class TurmaController {
                 }
                 
                 cursoBox.setItems(FXCollections.observableArrayList(cursoNomes));
+            }
+            
+        });
+        
+        cursoBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                int index = cursoBox.getSelectionModel().getSelectedIndex(); //Pega o index da seleção pra buscar no array de IDs
+                
+                int cursoId = cursoList.get(index).getIdCurso();
+                
+                turmaGenericaList = new TurmaDAO().filtroGen(cursoId);
+                recarregar(turmaGenericaList);
             }
             
         });
@@ -220,6 +233,12 @@ public class TurmaController {
     public void recarregar() {
         TurmaDAO dao = new TurmaDAO();
         this.turmaGenericaList = dao.listaGen();
+        this.genericas = FXCollections.observableArrayList(this.turmaGenericaList);
+        turmaTable.setItems(genericas); 
+    }
+    
+    public void recarregar(ArrayList<TurmaGenerica> turmaGenericaList) {
+        genericas.clear();
         this.genericas = FXCollections.observableArrayList(this.turmaGenericaList);
         turmaTable.setItems(genericas); 
     }

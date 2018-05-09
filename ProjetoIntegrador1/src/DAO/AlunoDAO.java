@@ -64,6 +64,24 @@ public class AlunoDAO {
         }
     }
     
+    public void edit(Aluno aluno){
+        try {
+            String update = "UPDATE aluno SET nome=?, cpf=?, rg=?, login=?, senha=?, ";
+                update+="TURMA_idTURMA=? WHERE idALUNO=?";
+            PreparedStatement stmt = this.con.prepareStatement(update);
+             stmt.setString(1, aluno.getNome());
+            stmt.setString(2, aluno.getCpf());
+            stmt.setString(3, aluno.getRG());
+            stmt.setString(4, aluno.getCpf());
+            stmt.setString(5, aluno.getSenha());
+            stmt.setInt(6, aluno.getTurma());
+            stmt.setInt(7, aluno.getId());
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public ArrayList<Aluno> lista(){
         ArrayList<Aluno> alunos = new ArrayList();
         try {
