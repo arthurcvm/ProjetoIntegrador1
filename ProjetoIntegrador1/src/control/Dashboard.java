@@ -5,6 +5,7 @@
  */
 package control;
 
+import DAO.AlunoDAO;
 import DAO.CursoDAO;
 import DAO.FaculdadeDAO;
 import DAO.ProfessorDAO;
@@ -88,11 +89,7 @@ public class Dashboard {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Aluno.fxml"));
             AnchorPane pane = (AnchorPane) loader.load();
             
-            ArrayList<Aluno> alunoList = new ArrayList<>(); //Pega do banco
-            ArrayList<AlunoGenerico> alunoGenericoList = new ArrayList<>();
-            for(Aluno a: alunoList){
-                alunoGenericoList.add(new AlunoGenerico(a));
-            }
+            ArrayList<AlunoGenerico> alunoGenericoList = new AlunoDAO().listaGen();
             
             FaculdadeDAO dao = new FaculdadeDAO();
             ArrayList<Faculdade> faculdadeList = dao.lista();

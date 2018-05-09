@@ -6,6 +6,7 @@
 package control;
 
 import DAO.AlunoDAO;
+import DAO.TurmaDAO;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -27,6 +28,7 @@ import javafx.stage.Stage;
 import model.Aluno;
 import model.AlunoGenerico;
 import model.Faculdade;
+import model.Turma;
 
 /**
  *
@@ -101,6 +103,7 @@ public class AlunoController {
     @FXML
     private void adicionar() throws SQLException{
         Aluno aluno = new Aluno();
+        ArrayList<Turma> turmaList = new TurmaDAO().lista();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AlunoForm.fxml")); //Carrega o arquivo FXML
             AnchorPane page = (AnchorPane) loader.load();
@@ -113,6 +116,7 @@ public class AlunoController {
             AlunoForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setAluno(aluno);
+            controller.setTurmaList(turmaList);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
@@ -120,6 +124,8 @@ public class AlunoController {
                 AlunoDAO dao = new AlunoDAO();
                 dao.insert(aluno);
             }
+            
+            recarregar();
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -129,12 +135,14 @@ public class AlunoController {
     @FXML
     private void excluir(){
         Aluno aluno = alunoTable.getSelectionModel().getSelectedItem().getAluno();
-        //Exclui no banco
+        AlunoDAO dao = new AlunoDAO();
+        dao.delete(aluno.getId());
     }
     
     @FXML
     private void editar(){
       Aluno aluno = alunoTable.getSelectionModel().getSelectedItem().getAluno();
+      ArrayList<Turma> turmaList = new TurmaDAO().lista();
       
       try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AlunoForm.fxml")); //Carrega o arquivo FXML
@@ -148,12 +156,16 @@ public class AlunoController {
             AlunoForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setAluno(aluno);
+            controller.setTurmaList(turmaList);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
-            /*if(aluno.getNome != null){
-                //salva no banco
-            }*/
+            if(aluno.getNome() != null){
+                AlunoDAO dao = new AlunoDAO();
+                //dao.edit(aluno);
+            }
+            
+            recarregar();
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -163,6 +175,7 @@ public class AlunoController {
     @FXML
     private void detalhes(){
         Aluno aluno = alunoTable.getSelectionModel().getSelectedItem().getAluno();
+        ArrayList<Turma> turmaList = new TurmaDAO().lista();
         
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AlunoForm.fxml")); //Carrega o arquivo FXML
@@ -176,6 +189,7 @@ public class AlunoController {
             AlunoForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setAluno(aluno);
+            controller.setTurmaList(turmaList);
             controller.setBlock();
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
@@ -183,5 +197,12 @@ public class AlunoController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void recarregar() {
+        AlunoDAO dao = new AlunoDAO();
+        this.alunoGenericoList = dao.listaGen();
+        this.genericos = FXCollections.observableArrayList(this.alunoGenericoList);
+        alunoTable.setItems(genericos); 
     }
 }
