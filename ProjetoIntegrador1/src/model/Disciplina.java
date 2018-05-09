@@ -14,7 +14,7 @@ public class Disciplina {
     private String nome;
     private String abreviacao;
     private int CH;
-    private int curso;
+    private int curso ;
     private int semestre;
     private int professor;
     
@@ -79,8 +79,6 @@ public class Disciplina {
         this.curso = curso;
     }
     
-    
-
     public int getSemestre() {
         return semestre;
     }
