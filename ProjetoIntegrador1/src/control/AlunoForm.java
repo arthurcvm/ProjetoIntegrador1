@@ -5,11 +5,15 @@
  */
 package control;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.util.ArrayList;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import model.Aluno;
+import model.Turma;
 
 /**
  *
@@ -24,9 +28,14 @@ public class AlunoForm {
     private JFXTextField rgField;
     @FXML
     private JFXPasswordField senhaField;
+    @FXML
+    private JFXComboBox turmaBox;
     
     private Stage dialogStage;
     private Aluno aluno;
+    
+    private ArrayList<Turma> turmaList = new ArrayList();
+    private ArrayList<String> turmaNomes = new ArrayList();
     
     /**
      * Inicializa a classe controlle. Este método é chamado automaticamente
@@ -47,7 +56,25 @@ public class AlunoForm {
             this.nomeField.setText(aluno.getNome());
             this.cpfField.setText(aluno.getCpf());
             this.rgField.setText(aluno.getRG());
-            //this.senhaField.setText("");
+            this.senhaField.setText(aluno.getSenha());
+        }
+    }
+
+    public void setTurmaList(ArrayList<Turma> turmaList) {
+        this.turmaList = turmaList;
+        
+        for(Turma t: turmaList){
+            turmaNomes.add(t.getDescricao());
+        }
+        
+        turmaBox.setItems(FXCollections.observableArrayList(turmaNomes));
+        
+        if(aluno.getNome() != null){
+            for(int i=0; i < turmaList.size(); i++){
+                if(turmaList.get(i).getIdTurma() == aluno.getTurma()){
+                    turmaBox.setValue(turmaNomes.get(i));
+                }
+            }
         }
     }
     
@@ -72,6 +99,7 @@ public class AlunoForm {
         this.aluno.setCpf(cpfField.getText());
         this.aluno.setRG(rgField.getText());
         this.aluno.setSenha(senhaField.getText());
+        this.aluno.setTurma(turmaList.get(turmaBox.getSelectionModel().getSelectedIndex()).getIdTurma());
         
         this.dialogStage.close(); //fecha a janela
     }

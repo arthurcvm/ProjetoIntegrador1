@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.AlunoGenerico;
 
 /**
  *
@@ -34,7 +35,7 @@ public class AlunoDAO {
             stmt.setString(1, Aluno.getNome());
             stmt.setString(2, Aluno.getCpf());
             stmt.setString(3, Aluno.getRG());
-            stmt.setString(4, Aluno.getLogin());
+            stmt.setString(4, Aluno.getCpf());
             stmt.setString(5, Aluno.getSenha());
             stmt.setInt(6, Aluno.getTurma());
         
@@ -87,19 +88,12 @@ public class AlunoDAO {
         return alunos;
     }
     
-    public void buscadado(String dado){
-        try {
-            String pesq = "SELECT nome, cpf, rg FROM aluno WHERE nome LIKE '%"+dado+"%'";
-            PreparedStatement stmt = this.con.prepareStatement(pesq);
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                String nome = rs.getString("nome");
-                String cpf = rs.getString("cpf");
-                String rg = rs.getString("rg");
-                System.out.println("| Nome: " + nome +" | CPF: " + cpf + " | RG: " + rg  + " | ");
+     public ArrayList<AlunoGenerico> listaGen(){
+        ArrayList<Aluno> alunoList =  this.lista();
+        ArrayList<AlunoGenerico> alunoGenericoList = new ArrayList();
+        for(Aluno a: alunoList){
+                alunoGenericoList.add(new AlunoGenerico(a));
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }       
+        return alunoGenericoList;
     }
 }
