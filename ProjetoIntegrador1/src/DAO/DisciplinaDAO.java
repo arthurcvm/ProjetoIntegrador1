@@ -28,15 +28,16 @@ public class DisciplinaDAO {
     
     public void insert(Disciplina dis){
         try {
-            String insert = "INSERT INTO disciplina (nome, abreviacao, ch, SEMESTRE_idSEMESTRE, PROFESSOR_idPROFESSOR)";
-                    insert += " VALUES(?,?,?,?,?)";
+            String insert = "INSERT INTO disciplina (nome, abreviacao, ch, CURSO_idCURSO, SEMESTRE_idSEMESTRE, PROFESSOR_idPROFESSOR)";
+                    insert += " VALUES(?,?,?,?,?,?)";
 
             PreparedStatement stmt = this.con.prepareStatement(insert);
             stmt.setString(1, dis.getNome());
             stmt.setString(2, dis.getAbreviacao());
             stmt.setInt(3, dis.getCH());
-            stmt.setInt(4, dis.getSemestre());
-            stmt.setInt(5, dis.getProfessor());
+            stmt.setInt(4, dis.getCurso());
+            stmt.setInt(5, dis.getSemestre());
+            stmt.setInt(6, dis.getProfessor());
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(DisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,6 +71,7 @@ public class DisciplinaDAO {
                 disc.setNome(rs.getString("nome"));
                 disc.setAbreviacao(rs.getString("abreviacao"));
                 disc.setCH(rs.getInt("ch"));
+                disc.setCH(rs.getInt("CURSO_idCURSO"));
                 disc.setSemestre(rs.getInt("SEMESTRE_idSEMESTRE"));
                 disc.setProfessor(rs.getInt("PROFESSOR_idPROFESSOR"));
                 disciplina.add(disc);
@@ -100,15 +102,16 @@ public class DisciplinaDAO {
     
     public void edit(Disciplina disc){
         try {
-            String update = "UPDATE disciplina SET nome=?, abreviacao=?, ch=?, SEMESTRE_idSEMESTRE=?, ";
+            String update = "UPDATE disciplina SET nome=?, abreviacao=?, ch=?, CURSO_idCURSO, SEMESTRE_idSEMESTRE=?, ";
                 update+="PROFESSOR_idPROFESSOR=? WHERE idDISCIPLINA=?";
             PreparedStatement stmt = this.con.prepareStatement(update);
             stmt.setString(1, disc.getNome());
             stmt.setString(2, disc.getAbreviacao());
             stmt.setInt(3, disc.getCH());
-            stmt.setInt(4, disc.getSemestre());
-            stmt.setInt(5, disc.getProfessor());
-            stmt.setInt(6, disc.getIdDisciplina());
+            stmt.setInt(4, disc.getCurso());
+            stmt.setInt(5, disc.getSemestre());
+            stmt.setInt(6, disc.getProfessor());
+            stmt.setInt(7, disc.getIdDisciplina());
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(FaculdadeDAO.class.getName()).log(Level.SEVERE, null, ex);
