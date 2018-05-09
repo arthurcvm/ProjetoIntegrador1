@@ -70,28 +70,33 @@ public class Login {
         String pass = this.senha.getText();
         
         for(Professor p: professorList){
-            if(p.getCpf().equals(login)){ //troca pelo login
-                if(p.getCpf().equals(pass)){ //troca pela senha
+            if(p.getLogin().equals(login)){
+                if(p.getSenha().equals(pass)){
                     professor.setNome(p.getNome());
                     professor.setCpf(p.getCpf());
+                    professor.setFaculdade(p.getFaculdade());
+                    professor.setId(p.getId());
+                    professor.setLogin(p.getLogin());
+                    professor.setSenha(p.getSenha());
                 }
             }
         }
         
         for(Aluno a: alunoList){
-            if(a.getCpf().equals(login)){ //troca pelo login
-                if(a.getCpf().equals(pass)){ //troca pela senha
+            if(a.getLogin().equals(login)){ //troca pelo login
+                if(a.getSenha().equals(pass)){ //troca pela senha
                     aluno.setNome(a.getNome());
                     aluno.setCpf(a.getCpf());
+                    aluno.setId(a.getId());
+                    aluno.setLogin(a.getLogin());
+                    aluno.setRG(a.getRG());
+                    aluno.setSenha(a.getSenha());
+                    aluno.setTurma(a.getTurma());
                 }
             }
         }
         
-        if(aluno.getNome() == null){ //Login incorreto
-            usuario.clear();
-            senha.clear();
-        }
-        else if(professor.getNome() == null){ //Login incorreto
+        if(aluno.getNome() == null && professor.getNome() == null){ //Login incorreto
             usuario.clear();
             senha.clear();
         }

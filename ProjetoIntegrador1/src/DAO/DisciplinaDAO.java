@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Disciplina;
+import model.DisciplinaGenerica;
 import model.Turma;
 
 /**
@@ -71,7 +72,7 @@ public class DisciplinaDAO {
                 disc.setNome(rs.getString("nome"));
                 disc.setAbreviacao(rs.getString("abreviacao"));
                 disc.setCH(rs.getInt("ch"));
-                disc.setCH(rs.getInt("CURSO_idCURSO"));
+                disc.setCurso(rs.getInt("CURSO_idCURSO"));
                 disc.setSemestre(rs.getInt("SEMESTRE_idSEMESTRE"));
                 disc.setProfessor(rs.getInt("PROFESSOR_idPROFESSOR"));
                 disciplina.add(disc);
@@ -80,6 +81,15 @@ public class DisciplinaDAO {
             Logger.getLogger(DisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return disciplina;
+    }
+    
+    public ArrayList<DisciplinaGenerica> listaGen(){
+        ArrayList<Disciplina> disciplinaList =  this.lista();
+        ArrayList<DisciplinaGenerica> disciplinaGenericaList = new ArrayList();
+        for(Disciplina a: disciplinaList){
+                disciplinaGenericaList.add(new DisciplinaGenerica(a));
+            }
+        return disciplinaGenericaList;
     }
     
     public void buscadado(String dado){
@@ -102,7 +112,7 @@ public class DisciplinaDAO {
     
     public void edit(Disciplina disc){
         try {
-            String update = "UPDATE disciplina SET nome=?, abreviacao=?, ch=?, CURSO_idCURSO, SEMESTRE_idSEMESTRE=?, ";
+            String update = "UPDATE disciplina SET nome=?, abreviacao=?, ch=?, CURSO_idCURSO=?, SEMESTRE_idSEMESTRE=?, ";
                 update+="PROFESSOR_idPROFESSOR=? WHERE idDISCIPLINA=?";
             PreparedStatement stmt = this.con.prepareStatement(update);
             stmt.setString(1, disc.getNome());

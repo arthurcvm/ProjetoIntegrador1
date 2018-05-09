@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.NotasAluno">
+   <children>
+      <JFXTextField fx:id="alunoField" editable="false" labelFloat="true" layoutX="40.0" layoutY="83.0" prefHeight="25.0" prefWidth="350.0" promptText="ALUNO" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="25.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <TableView fx:id="notasTable" layoutX="53.0" layoutY="142.0" prefHeight="200.0" prefWidth="514.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
+         <columns>
+            <TableColumn fx:id="disciplinaColumn" prefWidth="75.0" text="DISCIPLINA" />
+            <TableColumn fx:id="nota1Column" prefWidth="75.0" text="NOTA 1" />
+            <TableColumn fx:id="nota2Column" prefWidth="75.0" text="NOTA 2" />
+            <TableColumn fx:id="mediaColumn" prefWidth="75.0" text="MÉDIA FINAL" />
+            <TableColumn fx:id="situacaoColumn" prefWidth="75.0" text="SITUAÇÃO" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <JFXComboBox fx:id="semestreBox" labelFloat="true" layoutX="435.0" layoutY="40.0" prefHeight="30.0" prefWidth="150.0" promptText="SEMESTRE" style="-fx-font-size: 14;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0" />
+   </children>
+</AnchorPane>

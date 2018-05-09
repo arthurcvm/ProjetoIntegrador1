@@ -5,6 +5,9 @@
  */
 package control;
 
+import DAO.CursoDAO;
+import DAO.DisciplinaDAO;
+import DAO.ProfessorDAO;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -22,9 +25,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Curso;
 import model.Disciplina;
 import model.DisciplinaGenerica;
 import model.Faculdade;
+import model.Professor;
 
 /**
  *
@@ -103,6 +108,8 @@ public class DisciplinaController {
     @FXML
     private void adicionar(){
         Disciplina disciplina = new Disciplina();
+        ArrayList<Professor> professorList = new ProfessorDAO().lista();
+        ArrayList<Curso> cursoList = new CursoDAO().lista();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DisciplinaForm.fxml")); //Carrega o arquivo FXML
             AnchorPane page = (AnchorPane) loader.load();
@@ -115,12 +122,17 @@ public class DisciplinaController {
             DisciplinaForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setDisciplina(disciplina);
+            controller.setProfessorList(professorList);
+            controller.setCursoList(cursoList);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
             if(disciplina.getNome() != null){
-                //Salva no banco
+                DisciplinaDAO dao = new DisciplinaDAO();
+                dao.insert(disciplina);
             }
+            
+            recarregar();
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -130,12 +142,17 @@ public class DisciplinaController {
     @FXML
     private void excluir(){
         Disciplina disciplina = disciplinaTable.getSelectionModel().getSelectedItem().getDisciplina();
-        //Exclui no banco
+        DisciplinaDAO dao = new DisciplinaDAO();
+        dao.delete(disciplina.getIdDisciplina());
+        
+        recarregar();
     }
     
     @FXML
     private void editar(){
         Disciplina disciplina = disciplinaTable.getSelectionModel().getSelectedItem().getDisciplina();
+        ArrayList<Professor> professorList = new ProfessorDAO().lista();
+        ArrayList<Curso> cursoList = new CursoDAO().lista();
         
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DisciplinaForm.fxml")); //Carrega o arquivo FXML
@@ -149,12 +166,17 @@ public class DisciplinaController {
             DisciplinaForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setDisciplina(disciplina);
+            controller.setProfessorList(professorList);
+            controller.setCursoList(cursoList);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
             if(disciplina.getNome() != null){
-                //Salva no banco
+                DisciplinaDAO dao = new DisciplinaDAO();
+                dao.edit(disciplina);
             }
+            
+            recarregar();
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -164,6 +186,8 @@ public class DisciplinaController {
     @FXML
     private void detalhes(){
         Disciplina disciplina = disciplinaTable.getSelectionModel().getSelectedItem().getDisciplina();
+        ArrayList<Professor> professorList = new ProfessorDAO().lista();
+        ArrayList<Curso> cursoList = new CursoDAO().lista();
         
         
         try {
@@ -178,6 +202,8 @@ public class DisciplinaController {
             DisciplinaForm controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setDialogStage(stage);
             controller.setDisciplina(disciplina);
+            controller.setProfessorList(professorList);
+            controller.setCursoList(cursoList);
             controller.setBlock();
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
@@ -185,5 +211,12 @@ public class DisciplinaController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void recarregar() {
+        DisciplinaDAO dao = new DisciplinaDAO();
+        this.disciplinaGenericaList = dao.listaGen();
+        this.genericas = FXCollections.observableArrayList(this.disciplinaGenericaList);
+        disciplinaTable.setItems(genericas); 
     }
 }

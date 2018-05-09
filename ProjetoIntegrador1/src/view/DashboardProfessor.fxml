@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.DashboardProfessor">
+   <children>
+      <JFXTextField fx:id="professorField" editable="false" labelFloat="true" layoutX="40.0" layoutY="83.0" prefHeight="25.0" prefWidth="350.0" promptText="PROFESSOR" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="25.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <TableView fx:id="disciplinasTable" layoutX="53.0" layoutY="142.0" prefHeight="200.0" prefWidth="514.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
+         <columns>
+            <TableColumn fx:id="disciplinaColumn" prefWidth="75.0" text="DISCIPLINA" />
+            <TableColumn fx:id="cursoColumn" prefWidth="75.0" text="CURSO" />
+            <TableColumn fx:id="chColumn" prefWidth="75.0" text="CH" />
+            <TableColumn fx:id="semestreColumn" prefWidth="75.0" text="SEMESTRE" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <JFXButton layoutX="446.0" layoutY="356.0" onAction="#notasEFrequencias" prefHeight="30.0" style="-fx-background-color: #2ecc71;" text="Notas e Frequências" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

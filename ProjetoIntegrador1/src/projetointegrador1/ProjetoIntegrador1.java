@@ -5,7 +5,11 @@
  */
 package projetointegrador1;
 
+import DAO.AlunoDAO;
+import DAO.ProfessorDAO;
 import control.Dashboard;
+import control.DashboardAluno;
+import control.DashboardProfessor;
 import control.Login;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,21 +35,15 @@ public class ProjetoIntegrador1 extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-//        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-//        
-//        Scene scene = new Scene(root);
-//        
-//        stage.setScene(scene);
-//        stage.show();
-        showLogin(stage);
+
+//        showLogin(stage);
+
+        dashboard(stage);
     }
     
     public void showLogin(Stage stageMaster){
-        ArrayList<Professor> professorList = new ArrayList<>(); //Pega lista do banco
-        ArrayList<Aluno> alunoList = new ArrayList<>(); //Pega lista do banco
-        
-        //professorList.add(new Professor("José", "12345678910")); //Dado teste
-        //alunoList.add(new Aluno("Raimundo", "01987654321")); //Dado teste
+        ArrayList<Professor> professorList = new ProfessorDAO().lista();
+        ArrayList<Aluno> alunoList = new AlunoDAO().lista();
         
         usuarioA = new Aluno();
         usuarioP = new Professor();
@@ -68,7 +66,14 @@ public class ProjetoIntegrador1 extends Application {
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
             
-            dashboard(stageMaster);
+            if(usuarioA.getNome() != null){
+                dashboardAluno(stageMaster);
+            }
+            else if(usuarioP.getNome() != null){
+                dashboardProfessor(stageMaster);
+            }
+            
+//            dashboard(stageMaster);
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,6 +91,44 @@ public class ProjetoIntegrador1 extends Application {
             
             Dashboard controller = loader.getController(); //Puxa a referência do controller instanciado
             controller.setPainel(page);
+            
+            stage.showAndWait(); //Exibe janela e pausa esta thread
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void dashboardAluno(Stage stageMaster){        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DashboardAluno.fxml")); //Carrega o arquivo FXML
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage stage = new Stage(); //Cria um novo Stage
+            stage.initOwner(stageMaster); //Seta um stage pai
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+            
+            DashboardAluno controller = loader.getController(); //Puxa a referência do controller instanciado
+//            controller.setPainel(page);
+            
+            stage.showAndWait(); //Exibe janela e pausa esta thread
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void dashboardProfessor(Stage stageMaster){        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DashboardProfessor.fxml")); //Carrega o arquivo FXML
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage stage = new Stage(); //Cria um novo Stage
+            stage.initOwner(stageMaster); //Seta um stage pai
+            Scene scene = new Scene(page);
+            stage.setScene(scene);
+            
+            DashboardProfessor controller = loader.getController(); //Puxa a referência do controller instanciado
+//            controller.setPainel(page);
             
             stage.showAndWait(); //Exibe janela e pausa esta thread
         
