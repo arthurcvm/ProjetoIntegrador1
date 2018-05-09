@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Disciplina;
+import model.DisciplinaGenerica;
 import model.Turma;
 
 /**
@@ -28,8 +29,8 @@ public class DisciplinaDAO {
     
     public void insert(Disciplina dis){
         try {
-            String insert = "INSERT INTO disciplina (nome, abreviacao, ch, CURSO_idCURSO,";
-                    insert += " SEMESTRE_idSEMESTRE, PROFESSOR_idPROFESSOR) VALUES(?,?,?,?,?,?)";
+            String insert = "INSERT INTO disciplina (nome, abreviacao, ch, CURSO_idCURSO, SEMESTRE_idSEMESTRE, PROFESSOR_idPROFESSOR)";
+                    insert += " VALUES(?,?,?,?,?,?)";
 
             PreparedStatement stmt = this.con.prepareStatement(insert);
             stmt.setString(1, dis.getNome());
@@ -82,9 +83,36 @@ public class DisciplinaDAO {
         return disciplina;
     }
     
+    public ArrayList<DisciplinaGenerica> listaGen(){
+        ArrayList<Disciplina> disciplinaList =  this.lista();
+        ArrayList<DisciplinaGenerica> disciplinaGenericaList = new ArrayList();
+        for(Disciplina a: disciplinaList){
+                disciplinaGenericaList.add(new DisciplinaGenerica(a));
+            }
+        return disciplinaGenericaList;
+    }
+    
+    public void buscadado(String dado){
+        try { 
+            String pesq = "SELECT nome, abreviacao, CH, semestre, professor FROM disciplina WHERE nome LIKE '%"+dado+"%'";
+            PreparedStatement stmt = this.con.prepareStatement(pesq);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                String nome = rs.getString("nome");
+                String abreviacao = rs.getString("abreviacao");
+                int CH = rs.getInt("CH");
+                int semestre = rs.getInt("semestre");
+                int professor = rs.getInt("professor");
+                System.out.println("Nome: " + nome +" | Abreviação: " + abreviacao + " | CH: " + CH  + " | Semestre: " + semestre  + " | Professor: " + professor);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }           
+    }
+    
     public void edit(Disciplina disc){
         try {
-            String update = "UPDATE disciplina SET nome=?, abreviacao=?, ch=?, CURSO_idCURSO, SEMESTRE_idSEMESTRE=?, ";
+            String update = "UPDATE disciplina SET nome=?, abreviacao=?, ch=?, CURSO_idCURSO=?, SEMESTRE_idSEMESTRE=?, ";
                 update+="PROFESSOR_idPROFESSOR=? WHERE idDISCIPLINA=?";
             PreparedStatement stmt = this.con.prepareStatement(update);
             stmt.setString(1, disc.getNome());

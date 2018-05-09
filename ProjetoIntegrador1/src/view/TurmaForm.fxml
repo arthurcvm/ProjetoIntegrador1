@@ -23,7 +23,7 @@
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="122.0" layoutY="15.0" onAction="#cadastrar" style="-fx-background-color: #2ecc71;" text="CADASTRAR" textFill="WHITE">
+            <JFXButton layoutX="122.0" layoutY="15.0" onAction="#cadastrar" style="-fx-background-color: #2ecc71;" text="SALVAR" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>

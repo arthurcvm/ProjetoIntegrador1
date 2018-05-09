@@ -137,6 +137,8 @@ public class AlunoController {
         Aluno aluno = alunoTable.getSelectionModel().getSelectedItem().getAluno();
         AlunoDAO dao = new AlunoDAO();
         dao.delete(aluno.getId());
+        
+        recarregar();
     }
     
     @FXML
