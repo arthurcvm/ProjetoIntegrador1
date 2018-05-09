@@ -51,5 +51,6 @@
          </buttons>
       </ButtonBar>
       <JFXComboBox fx:id="faculdadeBox" labelFloat="true" layoutX="425.0" layoutY="30.0" prefHeight="30.0" prefWidth="200.0" promptText="FACULDADE" style="-fx-font-size: 14;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="25.0" />
+      <JFXComboBox fx:id="cursoBox" labelFloat="true" layoutX="40.0" layoutY="80.0" prefHeight="30.0" prefWidth="200.0" promptText="CURSO" style="-fx-font-size: 14;" />
    </children>
 </AnchorPane>

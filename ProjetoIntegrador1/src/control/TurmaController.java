@@ -39,6 +39,8 @@ public class TurmaController {
     @FXML
     private JFXComboBox faculdadeBox;
     @FXML
+    private JFXComboBox cursoBox;
+    @FXML
     private TableView<TurmaGenerica> turmaTable;
     @FXML
     private TableColumn<TurmaGenerica, String> descricaoColumn;
@@ -55,6 +57,11 @@ public class TurmaController {
     private ArrayList<String> faculdadeNomes = new ArrayList();
     private ArrayList<Integer> faculdadeIds = new ArrayList();
     
+    private ArrayList<Curso> cursoList = new ArrayList();
+    private ArrayList<String> cursoNomes = new ArrayList();
+    
+    
+    
     private BorderPane primaryStage;
     
     /**
@@ -68,13 +75,22 @@ public class TurmaController {
         semestreColumn.setCellValueFactory(cellData -> cellData.getValue().getSemestre().asObject());
         
         faculdadeBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 int index = faculdadeBox.getSelectionModel().getSelectedIndex(); //Pega o index da seleção pra buscar no array de IDs
+                
                 int faculdadeId = faculdadeIds.get(index);
+                cursoList = new CursoDAO().filtro(faculdadeId);
+                
+                cursoNomes.clear();
+                for(Curso c: cursoList){
+                    cursoNomes.add(c.getNomeCurso());
+                }
+                
+                cursoBox.setItems(FXCollections.observableArrayList(cursoNomes));
             }
             
-            //Aqui filtra as turmas pelo id da faculdade e retorna um arraylist atualizado
         });
     }
 
