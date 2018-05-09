@@ -28,8 +28,8 @@ public class DisciplinaDAO {
     
     public void insert(Disciplina dis){
         try {
-            String insert = "INSERT INTO disciplina (nome, abreviacao, ch, CURSO_idCURSO, SEMESTRE_idSEMESTRE, PROFESSOR_idPROFESSOR)";
-                    insert += " VALUES(?,?,?,?,?,?)";
+            String insert = "INSERT INTO disciplina (nome, abreviacao, ch, CURSO_idCURSO,";
+                    insert += " SEMESTRE_idSEMESTRE, PROFESSOR_idPROFESSOR) VALUES(?,?,?,?,?,?)";
 
             PreparedStatement stmt = this.con.prepareStatement(insert);
             stmt.setString(1, dis.getNome());
@@ -71,7 +71,7 @@ public class DisciplinaDAO {
                 disc.setNome(rs.getString("nome"));
                 disc.setAbreviacao(rs.getString("abreviacao"));
                 disc.setCH(rs.getInt("ch"));
-                disc.setCH(rs.getInt("CURSO_idCURSO"));
+                disc.setCurso(rs.getInt("CURSO_idCURSO"));
                 disc.setSemestre(rs.getInt("SEMESTRE_idSEMESTRE"));
                 disc.setProfessor(rs.getInt("PROFESSOR_idPROFESSOR"));
                 disciplina.add(disc);
@@ -80,24 +80,6 @@ public class DisciplinaDAO {
             Logger.getLogger(DisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return disciplina;
-    }
-    
-    public void buscadado(String dado){
-        try { 
-            String pesq = "SELECT nome, abreviacao, CH, semestre, professor FROM disciplina WHERE nome LIKE '%"+dado+"%'";
-            PreparedStatement stmt = this.con.prepareStatement(pesq);
-            ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
-                String nome = rs.getString("nome");
-                String abreviacao = rs.getString("abreviacao");
-                int CH = rs.getInt("CH");
-                int semestre = rs.getInt("semestre");
-                int professor = rs.getInt("professor");
-                System.out.println("Nome: " + nome +" | Abreviação: " + abreviacao + " | CH: " + CH  + " | Semestre: " + semestre  + " | Professor: " + professor);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }           
     }
     
     public void edit(Disciplina disc){
